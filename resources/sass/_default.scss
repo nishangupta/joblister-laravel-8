@@ -1,7 +1,125 @@
+@import "inc/roboto-font";
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 // Body
 $body-bg: #fff;
 
 // Typography
-$font-family-sans-serif: "Nunito", sans-serif;
+$font-family-sans-serif: "Roboto", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+//defaults
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+}
+p {
+    padding: 0;
+    margin: 0;
+}
+div {
+    padding: 0;
+    margin: 0;
+}
+a {
+    color: black;
+    &:hover {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+//variables
+$primary-color: #185a91;
+$primary-hover: #0085a7;
+$primary-light: #e0f7f8;
+$danger-color: #d93c23;
+$primary-grey: #888;
+$std-padding: 0.25rem 0.5rem;
+
+//custom icons
+.fa-primary {
+    color: $primary-color;
+}
+.fa-secondary {
+    color: $primary-light;
+}
+
+//locals
+.primary-link {
+    color: $primary-color;
+    &:hover {
+        color: $primary-light;
+        text-decoration: none;
+    }
+}
+.secondary-link {
+    color: $primary-hover;
+    &:hover {
+        color: $primary-hover;
+        text-decoration: none;
+    }
+}
+
+body {
+    background: $body-bg;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+}
+.primary-btn {
+    background-color: $primary-color;
+    color: white;
+    transition: background-color 0.25s ease;
+    padding: 6px 8px;
+    border: 1px solid $primary-color;
+    border-radius: 8px;
+    &:hover {
+        background-color: white;
+        color: $primary-hover;
+    }
+}
+.secondary-btn {
+    background-color: $primary-hover;
+    color: white;
+    transition: background-color 0.25s ease;
+    padding: 6px 8px;
+    border: 1px solid $primary-hover;
+    border-radius: 8px;
+    &:hover {
+        background-color: white;
+        color: $primary-hover;
+    }
+}
+.danger-btn {
+    background-color: $danger-color;
+    color: white;
+    &:hover {
+        background-color: white;
+        color: $danger-color;
+        border: 1px solid $danger-color;
+    }
+}
+.navbar-brand {
+    letter-spacing: 0.1rem;
+    color: $primary-hover !important;
+}

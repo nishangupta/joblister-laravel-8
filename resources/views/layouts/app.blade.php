@@ -13,7 +13,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     
@@ -24,6 +23,7 @@
 </head>
 <body>
     <div id="app">
+       @include('inc.navbar')
        @yield('content')
     </div>
     
