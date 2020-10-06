@@ -11860,6 +11860,13 @@ a:hover {
   text-decoration: none;
 }
 
+.line-divider {
+  height: 2px;
+  width: 100%;
+  background-color: #ddd;
+  margin: 4px 0;
+}
+
 .fa-primary {
   color: #185a91;
 }
@@ -11878,16 +11885,16 @@ a:hover {
 }
 
 .secondary-link {
-  color: #0085a7;
+  color: #02457c;
 }
 
 .secondary-link:hover {
-  color: #0085a7;
+  color: #02457c;
   text-decoration: none;
 }
 
 body {
-  background: #fff;
+  background: #f8f9fa;
   max-width: 100vw;
   overflow-x: hidden;
 }
@@ -11912,21 +11919,21 @@ button {
 
 .primary-btn:hover {
   background-color: white;
-  color: #0085a7;
+  color: #02457c;
 }
 
 .secondary-btn {
-  background-color: #0085a7;
+  background-color: #02457c;
   color: white;
   transition: background-color 0.25s ease;
   padding: 6px 8px;
-  border: 1px solid #0085a7;
+  border: 1px solid #02457c;
   border-radius: 8px;
 }
 
 .secondary-btn:hover {
   background-color: white;
-  color: #0085a7;
+  color: #02457c;
 }
 
 .danger-btn {
@@ -11942,6 +11949,52 @@ button {
 
 .navbar-brand {
   letter-spacing: 0.1rem;
-  color: #0085a7 !important;
+  color: #02457c !important;
+}
+
+.home-page {
+  padding: 2rem;
+  background-color: #0261a6;
+}
+
+.home-page .rounded-text {
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  margin: 2rem 0;
+  border-radius: 16px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.home-page .rounded-text p {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #185a91;
+}
+
+.home-page .home-search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.home-page .home-search-bar .home-search-input {
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+.home-page .home-search-bar .home-search-input:hover {
+  border: none;
+  outline: none;
+}
+
+.home-page .home-search-bar button {
+  margin-right: 0;
 }
 

@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 // Body
-$body-bg: #fff;
+$body-bg: #f8f9fa;
 
 // Typography
 $font-family-sans-serif: "Roboto", sans-serif;
@@ -39,10 +39,17 @@ a {
         text-decoration: none;
     }
 }
+//line-divider
+.line-divider {
+    height: 2px;
+    width: 100%;
+    background-color: #ddd;
+    margin: 4px 0;
+}
 
 //variables
 $primary-color: #185a91;
-$primary-hover: #0085a7;
+$primary-hover: #02457c;
 $primary-light: #e0f7f8;
 $danger-color: #d93c23;
 $primary-grey: #888;

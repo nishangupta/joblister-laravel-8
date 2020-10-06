@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
 
+    <link rel="shortcut icon" type="image/png" href="{{asset('images/logo/joblister.png')}}" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
@@ -23,8 +24,7 @@
 </head>
 <body>
     <div id="app">
-       @include('inc.navbar')
-       @yield('content')
+       @yield('layout-holder')
     </div>
     
     <script src="{{ asset('js/app.js') }}"></script>
