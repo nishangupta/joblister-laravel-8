@@ -11852,11 +11852,10 @@ div {
 }
 
 a {
-  color: black;
+  color: inherit;
 }
 
 a:hover {
-  color: black;
   text-decoration: none;
 }
 
@@ -11905,7 +11904,7 @@ button {
   border: 1px solid transparent;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   padding: 0.25rem 0.5rem;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 
 .primary-btn {
@@ -11914,12 +11913,26 @@ button {
   transition: background-color 0.25s ease;
   padding: 6px 8px;
   border: 1px solid #185a91;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 
 .primary-btn:hover {
   background-color: white;
   color: #02457c;
+}
+
+.primary-outline-btn {
+  background-color: #fff;
+  color: #185a91;
+  transition: background-color 0.25s ease;
+  padding: 6px 8px;
+  border: 1px solid #185a91;
+  border-radius: 2px;
+}
+
+.primary-outline-btn:hover {
+  background-color: #185a91;
+  color: #fff;
 }
 
 .secondary-btn {
@@ -11928,12 +11941,26 @@ button {
   transition: background-color 0.25s ease;
   padding: 6px 8px;
   border: 1px solid #02457c;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 
 .secondary-btn:hover {
   background-color: white;
   color: #02457c;
+}
+
+.secondary-outline-btn {
+  background-color: #fff;
+  color: #02457c;
+  transition: background-color 0.25s ease;
+  padding: 6px 8px;
+  border: 1px solid #02457c;
+  border-radius: 2px;
+}
+
+.secondary-outline-btn:hover {
+  background-color: #02457c;
+  color: white;
 }
 
 .danger-btn {
@@ -11996,5 +12023,50 @@ button {
 
 .home-page .home-search-bar button {
   margin-right: 0;
+}
+
+.jobs-section .job-item {
+  display: flex;
+  padding: 6px 0;
+}
+
+.jobs-section .job-item:hover {
+  background-color: #eee;
+}
+
+.jobs-section .job-item img {
+  width: 100%;
+  height: auto;
+  flex: 1;
+  border: 1px solid #ccc;
+}
+
+.jobs-section .job-item .job-description {
+  flex: 4;
+  padding-left: 1rem;
+}
+
+.jobs-section .job-item .job-description .company-name {
+  font-size: 0.85rem;
+  font-weight: bold;
+  width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jobs-section .job-item .job-description .company-listings {
+  font-size: 0.85rem;
+  list-style: none;
+  color: #185a91;
+}
+
+.jobs-section .top-employers {
+  display: flex;
+  align-items: center;
+}
+
+.jobs-section .top-employers .top-employer {
+  flex: 1;
 }
 

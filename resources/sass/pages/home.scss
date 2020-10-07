@@ -36,3 +36,45 @@
         }
     }
 }
+
+//jobs section
+.jobs-section {
+    .job-item {
+        display: flex;
+        padding: 6px 0;
+        &:hover {
+            background-color: #eee;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            flex: 1;
+            border: 1px solid #ccc;
+        }
+        .job-description {
+            flex: 4;
+            padding-left: 1rem;
+            .company-name {
+                font-size: 0.85rem;
+                font-weight: bold;
+                width: 140px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .company-listings {
+                font-size: 0.85rem;
+                list-style: none;
+                color: $primary-color;
+            }
+        }
+    }
+
+    .top-employers {
+        display: flex;
+        align-items: center;
+        .top-employer {
+            flex: 1;
+        }
+    }
+}
