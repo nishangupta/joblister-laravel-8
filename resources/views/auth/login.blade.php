@@ -58,6 +58,8 @@
             <div class="login-poster">
                 {{-- <img src="" alt=""> --}}
                 <h2 class="mb-3 slogon">Mark yourself as <br>Actively Job seeker</h2>
+                <p class="text-white lead">We have enabled this feature targeting superheros
+                    who lost their jobs during this crisis.</p>
             </div>
         </div>
     </div>
@@ -66,29 +68,17 @@
 
 @push('css')
 <style>
-    .login-container{
-        padding:3rem 2rem;
-        border:1px solid #ddd;
-        background-color: white;
-        color:#666;
-    }
-    .login-header .login-header-title{
-        font-size:1.3rem;
-        font-weight: bold;
-    }
-    .login-poster{
-        background-image:url('{{asset("images/login-bg.jpg")}}');
-        background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.3)), url('{{asset("images/login-bg.jpg")}}');
-        background-repeat:no-repeat;
-        background-size:cover;
-        background-position: center; 
-        padding:1rem 2rem;
-        height:100%;
-        min-height:500px;
-        text-shadow: 1px 1px 5px 8px rgba(0,0,0,0.4);
-    }
-    .login-poster .slogon {
-        font-family:Georgia, 'Times New Roman', Times, serif ;
-    }
+.login-poster {
+   background-image: url('{{asset("images/login-bg.jpg")}}');
+    background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.35)
+        ),
+        url('{{asset("images/login-bg.jpg")}}');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 </style>
 @endpush

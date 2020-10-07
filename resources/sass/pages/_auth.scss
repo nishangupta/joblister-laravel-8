@@ -1,0 +1,24 @@
+.login-container {
+    padding: 3rem 2rem;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #666;
+    .login-header {
+        .login-header-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+    }
+}
+.login-poster {
+    padding: 1rem 2rem;
+    height: 100%;
+    min-height: 500px;
+    text-shadow: 1px 1px 5px 8px rgba(0, 0, 0, 0.4);
+}
+.login-poster .slogon {
+    font-size: 2rem;
+    color: white;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    line-height: 1.3;
+}
