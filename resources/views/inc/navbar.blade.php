@@ -18,7 +18,7 @@
     <ul class="navbar-nav ml-auto">
       @auth
       <li class="nav-item dropdown">
-        <a href="" class="primary-btn dropdown-toggle" data-toggle="dropdown">Logged in as {{auth()->user()->name}}</a>
+        <a href="#" class="primary-btn dropdown-toggle" data-toggle="dropdown">Logged in as {{auth()->user()->name}}</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
           <a class="dropdown-item" href="">
             <span class="dropdown-link" >User account</span>
@@ -30,7 +30,7 @@
       </li>
       @endauth
       @guest
-      <a href="" class="primary-btn">Sign up or Log in</a>
+      <a href="/login" class="primary-btn">Sign up or Log in</a>
       @endguest
     </ul>
     {{-- <div class="mb-nav">

@@ -11977,6 +11977,7 @@ button {
 .navbar-brand {
   letter-spacing: 0.1rem;
   color: #02457c !important;
+  font-weight: bold;
 }
 
 .home-page {
