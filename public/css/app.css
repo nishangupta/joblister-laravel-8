@@ -12076,6 +12076,7 @@ button {
   border: 1px solid #ddd;
   background-color: white;
   color: #666;
+  height: 100%;
 }
 
 .login-container .login-header .login-header-title {

@@ -31,7 +31,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                 </div>
-                            <input id="password" type="password" placeholder="E-mail address" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required>
+                            <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

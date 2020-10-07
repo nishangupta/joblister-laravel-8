@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-white bg-white shadow" id="navbar">
   <div class="container">
-    <a href="" class="navbar-brand">
+  <a href="{{URL('/')}}" class="navbar-brand">
       JobLister
     </a>
     
