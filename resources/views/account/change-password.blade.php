@@ -7,6 +7,8 @@
     </div>
     <div class="account-bdy p-3">
       <form action="{{route('account.changePassword')}}" method="POST">
+        @csrf
+        @method('PUT')
         <div class="form-group">
           <input type="password" placeholder="Current Password *" class="form-control @error('password') is-invalid @enderror" name="current_password" value="{{ old('current_password') }}" required>
             @error('current_password')
@@ -35,7 +37,7 @@
         <div class="line-divider"></div>
         <div class="mt-3">
           <button type="submit" class="btn primary-btn">Change Password</button>
-          <button type="submit" class="btn primary-outline-btn">Cancel</button>
+          <button class="btn primary-outline-btn">Cancel</button>
         </div>
       </form>
     </div>

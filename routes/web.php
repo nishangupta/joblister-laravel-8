@@ -1,18 +1,20 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'App\Http\Controllers\PostController@index')->name('post.index');
-Route::get('/job/{job}', 'App\Http\Controllers\PostController@show')->name('post.show');
-
+Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/job/{job}', [PostController::class, 'show'])->name('post.show');
+// Route::get('/lists',PostCont);
 
 //Accounts
-Route::get('/account/logout', 'App\Http\Controllers\AccountController@logout')->name('account.logout');
-Route::get('/account', 'App\Http\Controllers\AccountController@index')->name('account.index');
-Route::get('/account/deactivate', 'App\Http\Controllers\AccountController@deactivateView')->name('account.deactivate');
-Route::delete('/account/delete', 'App\Http\Controllers\AccountController@deleteAccount')->name('account.delete');
+Route::get('/account/logout', [AccountController::class, 'logout'])->name('account.logout');
+Route::get('/account', [AccountController::class, 'index'])->name('account.index');
+Route::get('/account/deactivate', [AccountController::class, 'deactivateView'])->name('account.deactivate');
+Route::delete('/account/delete', [AccountController::class, 'deleteAccount'])->name('account.delete');
 
-Route::get('/account/change-password', 'App\Http\Controllers\AccountController@changePasswordView')->name('account.changePassword');
-Route::post('/account/change-password', 'App\Http\Controllers\AccountController@changePassword')->name('account.changePassword');
-// Route::get('/lists',PostCont);
+Route::get('/account/change-password', [AccountController::class, 'changePasswordView'])->name('account.changePassword');
+Route::put('/account/change-password', [AccountController::class, 'changePassword'])->name('account.changePassword');
+
+Route::get('/account/my-save-list', [AccountController::class, 'saveList'])->name('account.saveList');

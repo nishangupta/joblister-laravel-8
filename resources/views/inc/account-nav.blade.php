@@ -11,8 +11,8 @@
       </a>
     </li>    
     <li class="list-group-item list-group-item-action">
-      <a href="{{route('account.index')}}" class="account-nav-link">
-        <i class="fas fa-tools"></i> Get Author Actions
+      <a href="{{route('account.saveList')}}" class="account-nav-link">
+        <i class="fas fa-list"></i> My save list
       </a>
     </li>   
      <li class="list-group-item list-group-item-action">
