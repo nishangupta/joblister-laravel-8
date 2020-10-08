@@ -11922,7 +11922,7 @@ button {
 }
 
 .primary-outline-btn {
-  background-color: #fff;
+  background-color: white;
   color: #185a91;
   transition: background-color 0.25s ease;
   padding: 6px 8px;
@@ -11932,7 +11932,7 @@ button {
 
 .primary-outline-btn:hover {
   background-color: #185a91;
-  color: #fff;
+  color: white;
 }
 
 .secondary-btn {
@@ -11950,7 +11950,7 @@ button {
 }
 
 .secondary-outline-btn {
-  background-color: #fff;
+  background-color: white;
   color: #02457c;
   transition: background-color 0.25s ease;
   padding: 6px 8px;
@@ -11982,7 +11982,7 @@ button {
 
 .home-page {
   padding: 2rem;
-  background-color: #0261a6;
+  background: linear-gradient(to bottom right, #0261a6, #022c5a);
 }
 
 .home-page .rounded-text {
@@ -12050,7 +12050,7 @@ button {
 .jobs-section .job-item .job-description .company-name {
   font-size: 0.85rem;
   font-weight: bold;
-  width: 140px;
+  width: 100px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -12096,5 +12096,20 @@ button {
   color: white;
   font-family: Georgia, "Times New Roman", Times, serif;
   line-height: 1.3;
+}
+
+.account-layout .account-hdr {
+  padding: 1rem 1rem;
+  background-color: white;
+}
+
+.account-layout .account-bdy .list-group-item.active {
+  background-color: #185a91;
+  color: white;
+  border: #185a91;
+}
+
+.account-layout .account-bdy .list-group-item.active .account-nav-link:hover {
+  color: #efefef;
 }
 

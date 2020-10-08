@@ -1,0 +1,16 @@
+.account-layout {
+    .account-hdr {
+        padding: 1rem 1rem;
+        background-color: white;
+    }
+    .account-bdy {
+        .list-group-item.active {
+            background-color: $primary-color;
+            color: white;
+            border: $primary-color;
+            .account-nav-link:hover {
+                color: #efefef;
+            }
+        }
+    }
+}

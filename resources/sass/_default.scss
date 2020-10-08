@@ -6,8 +6,6 @@
     margin: 0;
     box-sizing: border-box;
 }
-// Body
-$body-bg: #f8f9fa;
 
 // Typography
 $font-family-sans-serif: "Roboto", sans-serif;
@@ -52,6 +50,7 @@ $primary-hover: #02457c;
 $primary-light: #e0f7f8;
 $danger-color: #d93c23;
 $primary-grey: #888;
+$body-bg: #f8f9fa;
 $std-padding: 0.25rem 0.5rem;
 
 //custom icons
@@ -105,7 +104,7 @@ button {
     }
 }
 .primary-outline-btn {
-    background-color: $white;
+    background-color: white;
     color: $primary-color;
     transition: background-color 0.25s ease;
     padding: 6px 8px;
@@ -113,7 +112,7 @@ button {
     border-radius: 2px;
     &:hover {
         background-color: $primary-color;
-        color: $white;
+        color: white;
     }
 }
 
@@ -130,7 +129,7 @@ button {
     }
 }
 .secondary-outline-btn {
-    background-color: $white;
+    background-color: white;
     color: $primary-hover;
     transition: background-color 0.25s ease;
     padding: 6px 8px;

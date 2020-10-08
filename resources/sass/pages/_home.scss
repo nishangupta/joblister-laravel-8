@@ -1,6 +1,6 @@
 .home-page {
     padding: 2rem;
-    background-color: #0261a6;
+    background: linear-gradient(to bottom right, #0261a6, #022c5a);
     .rounded-text {
         background-color: white;
         padding: 0.5rem 1rem;
@@ -57,7 +57,7 @@
             .company-name {
                 font-size: 0.85rem;
                 font-weight: bold;
-                width: 140px;
+                width: 100px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
