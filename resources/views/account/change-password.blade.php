@@ -10,7 +10,7 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-          <input type="password" placeholder="Current Password *" class="form-control @error('password') is-invalid @enderror" name="current_password" value="{{ old('current_password') }}" required>
+          <input type="password" placeholder="Current Password *" class="form-control @error('current_password') is-invalid @enderror" name="current_password" value="{{ old('current_password') }}" required>
             @error('current_password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

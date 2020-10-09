@@ -11866,6 +11866,10 @@ a:hover {
   margin: 4px 0;
 }
 
+.primary-bg {
+  background-color: #185a91;
+}
+
 .fa-primary {
   color: #185a91;
 }
@@ -11884,11 +11888,11 @@ a:hover {
 }
 
 .secondary-link {
-  color: #02457c;
+  color: #023966;
 }
 
 .secondary-link:hover {
-  color: #02457c;
+  color: #023966;
   text-decoration: none;
 }
 
@@ -11918,7 +11922,7 @@ button {
 
 .primary-btn:hover {
   background-color: white;
-  color: #02457c;
+  color: #023966;
 }
 
 .primary-outline-btn {
@@ -11936,30 +11940,30 @@ button {
 }
 
 .secondary-btn {
-  background-color: #02457c;
+  background-color: #185a91;
   color: white;
   transition: background-color 0.25s ease;
   padding: 6px 8px;
-  border: 1px solid #02457c;
+  border: 1px solid #185a91;
   border-radius: 2px;
 }
 
 .secondary-btn:hover {
-  background-color: white;
-  color: #02457c;
+  background-color: #023966;
+  color: white;
 }
 
 .secondary-outline-btn {
   background-color: white;
-  color: #02457c;
+  color: #023966;
   transition: background-color 0.25s ease;
   padding: 6px 8px;
-  border: 1px solid #02457c;
+  border: 1px solid #023966;
   border-radius: 2px;
 }
 
 .secondary-outline-btn:hover {
-  background-color: #02457c;
+  background-color: #023966;
   color: white;
 }
 
@@ -11976,7 +11980,7 @@ button {
 
 .navbar-brand {
   letter-spacing: 0.1rem;
-  color: #02457c !important;
+  color: #023966 !important;
   font-weight: bold;
 }
 

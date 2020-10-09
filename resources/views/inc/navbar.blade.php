@@ -15,6 +15,27 @@
         <button class="dropdown-item" type="button">Arabic</button>
       </div>
     </div> --}}
+    {{-- <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item dropdown">
+        <a href="#" class="primary-btn dropdown-toggle" data-toggle="dropdown"><i class="fas fa-account"></i> Account</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
+          <a class="dropdown-item" href="{{route('account.index')}}">
+            <div class="text-center">
+                <img src="{{asset('images/user-profile.png')}}" alt="user profile" width="50px" class="img-fluid rounded-circle">
+              <div class="">
+                <p class="text-uppercase">{{auth()->user()->name}}</p>
+                <p class="">{{auth()->user()->email}}</p>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{route('account.changePassword')}}">
+            <span class="dropdown-link" >Change Password</span>
+          </a>
+        </div>
+      </li>
+    </ul> --}}
     <ul class="navbar-nav ml-auto">
       @auth
       <li class="nav-item dropdown">

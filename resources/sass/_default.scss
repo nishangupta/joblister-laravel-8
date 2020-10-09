@@ -46,12 +46,16 @@ a {
 
 //variables
 $primary-color: #185a91;
-$primary-hover: #02457c;
+$primary-hover: #023966;
 $primary-light: #e0f7f8;
 $danger-color: #d93c23;
 $primary-grey: #888;
 $body-bg: #f8f9fa;
 $std-padding: 0.25rem 0.5rem;
+
+.primary-bg {
+    background-color: $primary-color;
+}
 
 //custom icons
 .fa-primary {
@@ -117,15 +121,15 @@ button {
 }
 
 .secondary-btn {
-    background-color: $primary-hover;
+    background-color: $primary-color;
     color: white;
     transition: background-color 0.25s ease;
     padding: 6px 8px;
-    border: 1px solid $primary-hover;
+    border: 1px solid $primary-color;
     border-radius: 2px;
     &:hover {
-        background-color: white;
-        color: $primary-hover;
+        background-color: $primary-hover;
+        color: white;
     }
 }
 .secondary-outline-btn {

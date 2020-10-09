@@ -6,12 +6,12 @@
         <div class="col-sm-12 col-md-6 px-0">
             <div class="login-container">
                 <div class="login-header mb-3">
-                    <h3> <img src="{{asset('images/logo/joblister.png')}}" width="50px;" alt=""> JobSeeker Login</h3>
-                    <p class="login-header-title">Welcome back to Job lister</p>
+                    <h3> <img src="{{asset('images/logo/joblister.png')}}" width="50px;" alt=""> Joblister Admin Login</h3>
+                    <p class="login-header-title">Welcome back Admin!</p>
                     <p class="text-muted">login with your registered email & password.</p>
                 </div>
                 <div class="login-form">
-                    <form action="{{route('login')}}" method="POST">
+                    <form action="{{route('admin.login')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -49,7 +49,7 @@
                         <button type="submit" class="btn primary-btn btn-block">Login</button>
                     </form>
                     <div class="my-3">
-                        <p>Don't have an account? <a href="/register">Register now</a></p>
+                    <p>Don't have an account? <a href="{{route('admin.register')}}">Register Admin now</a></p>
                     </div>
                 </div>
             </div>

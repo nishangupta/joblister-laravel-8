@@ -18,7 +18,7 @@ class AccountController extends Controller
     {
         return view('account.user-account');
     }
-    public function saveList()
+    public function savedList()
     {
         return view('account.save-list');
     }
@@ -77,9 +77,19 @@ class AccountController extends Controller
             return view('account.deactivate');
         }
     }
+
     public function logout()
     {
-        Auth::logout(auth()->user());
+        Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function dashboard()
+    {
+        return view('account.dashboard');
+    }
+    public function authorSection()
+    {
+        return view('account.author-section');
     }
 }
