@@ -51,8 +51,14 @@
                           <p class="mb-3 alert alert-info">For job listings you need to add Company details.</p>
                           <div class="mb-3 d-flex">
                             <a href="{{route('company.create')}}" class="btn primary-btn mr-2">Create Company</a>
-                            <a href="{{route('post.edit',['post'=>'1'])}}" class="btn secondary-btn mr-2">Edit Company</a>
-                            <a href="{{route('post.edit',['post'=>'1'])}}" class="btn danger-btn ml-auto ">Delete Company</a>
+                            <a href="{{route('company.edit')}}" class="btn secondary-btn mr-2">Edit Company</a>
+                            <div class="ml-auto">
+                                <form action="{{route('company.destroy')}}" id="companyDestroyForm" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" id="companyDestroyBtn" class="btn danger-btn">Delete Company</a>
+                                </form>
+                            </div>
                           </div>
 
                           <div class="row">
@@ -152,4 +158,18 @@
     transform: rotate(-44deg);
 }
 </style>
+@endpush
+
+@push('js')
+<script>
+    $(document).ready(function(){
+        //delete author company
+        $('#companyDestroyBtn').click(function(e){
+            e.preventDefault();
+            if(window.confirm('Are you sure you want delete the company?')){
+                $('#companyDestroyForm').submit();
+            }
+        })
+    })
+</script>    
 @endpush

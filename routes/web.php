@@ -26,8 +26,10 @@ Route::get('/account/post/create', [PostController::class, 'create'])->name('pos
 Route::get('/account/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
 
 Route::get('/account/company/create', [CompanyController::class, 'create'])->name('company.create');
-Route::get('/account/company/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+Route::get('/account/company/edit', [CompanyController::class, 'edit'])->name('company.edit');
+Route::put('/account/company/{id}', [CompanyCategoryController::class, 'update'])->name('company.update');
 Route::post('/account/company', [CompanyController::class, 'store'])->name('company.store');
+Route::delete('/account/company', [CompanyController::class, 'destroy'])->name('company.destroy');
 
 Route::post('/account/category', [CompanyCategoryController::class, 'store'])->name('category.store');
 Route::get('/account/category/{category}/edit', [CompanyCategoryController::class, 'edit'])->name('category.edit');

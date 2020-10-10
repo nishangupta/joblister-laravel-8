@@ -35,7 +35,6 @@ class CompanyCategoryController extends Controller
         return redirect()->route('account.dashboard');
     }
 
-
     public function destroy($id)
     {
         $category = CompanyCategory::find($id);
