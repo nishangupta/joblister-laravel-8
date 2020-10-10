@@ -83,13 +83,4 @@ class AccountController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
-
-    public function dashboard()
-    {
-        return view('account.dashboard');
-    }
-    public function authorSection()
-    {
-        return view('account.author-section');
-    }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\AuthorController;
 use App\Http\Controllers\CompanyCategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PostController;
@@ -10,34 +12,43 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+//public routes
 Route::get('/', [PostController::class, 'index'])->name('post.index');
 Route::get('/job/{job}', [PostController::class, 'show'])->name('post.show');
 
-//Accounts
-Route::get('/account/logout', [AccountController::class, 'logout'])->name('account.logout');
-Route::get('/account/overview', [AccountController::class, 'index'])->name('account.index');
-Route::get('/account/deactivate', [AccountController::class, 'deactivateView'])->name('account.deactivate');
-Route::get('/account/change-password', [AccountController::class, 'changePasswordView'])->name('account.changePassword');
-Route::get('/account/my-saved-jobs', [AccountController::class, 'savedList'])->name('account.savedList');
-Route::get('/account/dashboard', [AccountController::class, 'dashboard'])->name('account.dashboard');
-Route::get('/account/author-section', [AccountController::class, 'authorSection'])->name('account.authorSection');
+//auth routes
+Route::prefix('account')->group(function () {
+  //every auth routes AccountController
+  Route::get('logout', [AccountController::class, 'logout'])->name('account.logout');
+  Route::get('overview', [AccountController::class, 'index'])->name('account.index');
+  Route::get('deactivate', [AccountController::class, 'deactivateView'])->name('account.deactivate');
+  Route::get('change-password', [AccountController::class, 'changePasswordView'])->name('account.changePassword');
+  Route::get('my-saved-jobs', [AccountController::class, 'savedList'])->name('account.savedList');
+  Route::get('employer/{employer}', [AuthorController::class, 'employer'])->name('account.employer');
+  Route::delete('delete', [AccountController::class, 'deleteAccount'])->name('account.delete');
+  Route::put('change-password', [AccountController::class, 'changePassword'])->name('account.changePassword');
 
-Route::get('/account/post/create', [PostController::class, 'create'])->name('post.create');
-Route::get('/account/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+  //Admin Routes
+  Route::get('dashboard', [AdminController::class, 'dashboard'])->name('account.dashboard');
+  Route::get('manage-authors', [AdminController::class, 'manageAuthors'])->name('account.manageAuthors');
 
-Route::get('/account/company/create', [CompanyController::class, 'create'])->name('company.create');
-Route::get('/account/company/edit', [CompanyController::class, 'edit'])->name('company.edit');
-Route::put('/account/company/{id}', [CompanyCategoryController::class, 'update'])->name('company.update');
-Route::post('/account/company', [CompanyController::class, 'store'])->name('company.store');
-Route::delete('/account/company', [CompanyController::class, 'destroy'])->name('company.destroy');
+  //Author Routes
+  Route::get('author-section', [AuthorController::class, 'authorSection'])->name('account.authorSection');
 
-Route::post('/account/category', [CompanyCategoryController::class, 'store'])->name('category.store');
-Route::get('/account/category/{category}/edit', [CompanyCategoryController::class, 'edit'])->name('category.edit');
-Route::put('/account/category/{category}', [CompanyCategoryController::class, 'update'])->name('category.update');
-Route::delete('/account/category/{category}', [CompanyCategoryController::class, 'delete'])->name('category.delete');
+  Route::get('category/{category}/edit', [CompanyCategoryController::class, 'edit'])->name('category.edit');
+  Route::post('category', [CompanyCategoryController::class, 'store'])->name('category.store');
+  Route::put('category/{category}', [CompanyCategoryController::class, 'update'])->name('category.update');
+  Route::delete('category/{category}', [CompanyCategoryController::class, 'destroy'])->name('category.destroy');
 
-Route::delete('/account/delete', [AccountController::class, 'deleteAccount'])->name('account.delete');
-Route::put('/account/change-password', [AccountController::class, 'changePassword'])->name('account.changePassword');
+  Route::get('post/create', [PostController::class, 'create'])->name('post.create');
+  Route::get('post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+
+  Route::get('company/create', [CompanyController::class, 'create'])->name('company.create');
+  Route::get('company/edit', [CompanyController::class, 'edit'])->name('company.edit');
+  Route::put('company/{id}', [CompanyCategoryController::class, 'update'])->name('company.update');
+  Route::post('company', [CompanyController::class, 'store'])->name('company.store');
+  Route::delete('company', [CompanyController::class, 'destroy'])->name('company.destroy');
+});
 
 //admins
 // Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
@@ -55,7 +66,8 @@ Route::get('/make-role', function () {
 });
 
 Route::get('/make-permiss', function () {
-  $roles = ['view-dashboard', 'create_post', 'edit_post', 'delete_post'];
+  // $roles = ['view-dashboard', 'create_post', 'edit_post', 'delete_post'];
+  // $roles = ['manage-authors', 'author-section', 'create_category', 'edit_category', 'delete_category'];
   foreach ($roles as $role) {
     Permission::create(['name' => $role]);
   }
@@ -63,26 +75,36 @@ Route::get('/make-permiss', function () {
 
 Route::get('/adminPermission', function () {
   $role = Role::findByName('admin');
-  $permission = Permission::findByName('view-dashboard');
-
-  $role->givePermissionTo($permission);
+  $permissions = Permission::all()->pluck('name');
+  foreach ($permissions as $permission) {
+    $getPermission = Permission::findByName($permission);
+    $role->givePermissionTo($getPermission);
+  }
 });
 
 
 Route::get('/authorPermission', function () {
   $role = Role::findByName('author');
-  $permission = Permission::findByName('create_post');
 
-  $role->givePermissionTo($permission);
+  $permissions = ['create_post', 'edit_post', 'delete_post', 'author-section',];
+  foreach ($permissions as $permission) {
+    $getPermission = Permission::findByName($permission);
+    $role->givePermissionTo($getPermission);
+  }
 });
 
 //has no permission
-Route::get('/userPermission', function () {
-  $role = Role::findByName('user');
-  $permission = Permission::findByName('');
+// Route::get('/userPermission', function () {
+//   $role = Role::findByName('user');
 
-  $role->givePermissionTo($permission);
-});
+//   $permissions = ['create_post', 'edit_post', 'delete_post', 'author-section',];
+//   foreach ($permissions as $permission) {
+//     $getPermission = Permission::findByName($permission);
+//     $role->givePermissionTo($getPermission);
+//   }
+
+//   $role->givePermissionTo($permission);
+// });
 
 
 Route::get('/giveadminrole', function () {

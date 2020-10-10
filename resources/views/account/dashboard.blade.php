@@ -42,14 +42,10 @@
           </div>
       </div>
 
-      <section class="dashboard-authors">
+      <section class="dashboard-authors my-5">
         <div class="row my-4">
           <div class="col-lg-12 col-md-8 col-sm-12">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Manage Authors (Job listers)</h4>
-              </div>
-            </div>
+            <h4 class="card-title text-secondary">Manage Authors (Job listers)</h4>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead class="thead-inverse">
@@ -62,60 +58,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                            @foreach($recentAuthors as $author)
                         <tr>
-                            <td>1</td>
-                            <td>Nishant</td>
-                            <td>nishant@nishant.com</td>
-                            <td>12</td>
+                            <td>{{$author->id}}</td>
+                            <td>{{$author->name}}</td>
+                            <td>{{$author->email}}</td>
+                            <td>{{$author->company->title}}</td>
                             <td>
-                              <button class="btn primary-btn">View Profile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minasd</td>
-                            <td>asd@asd.com</td>
-                            <td>2</td>
-                            <td>
-                            <button class="btn primary-btn">View Profile</button>
+                            <a href="" class="btn primary-btn">View Profile</a>
                             </td> 
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minasd</td>
-                            <td>asd@asd.com</td>
-                            <td>2</td>
-                            <td>
-                            <button class="btn primary-btn">View Profile</button>
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minasd</td>
-                            <td>asd@asd.com</td>
-                            <td>2</td>
-                            <td>
-                            <button class="btn primary-btn">View Profile</button>
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minasd</td>
-                            <td>asd@asd.com</td>
-                            <td>2</td>
-                            <td>
-                            <button class="btn primary-btn">View Profile</button>
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minasd</td>
-                            <td>asd@asd.com</td>
-                            <td>2</td>
-                            <td>
-                            <button class="btn primary-btn">View Profile</button>
-                            </td> 
-                        </tr>
+                        @endforeach
+                        <div class="d-flex">
+                            {{$recentAuthors->links()}}
+                        </div>
                     </tbody>
                 </table>
             </div>
@@ -139,6 +95,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#permissions-tab" role="tab" data-toggle="tab">Permissions</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#role-have-permission-tab" role="tab" data-toggle="tab">Roles have permissions</a>
+                    </li>
+                    
                 </ul>
 
                 <!-- Tab panes -->
@@ -169,21 +129,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($companyCategories as $category)
                                     <tr>
-                                        <td>1</td>
-                                        <td>It and Communications</td>
-                                        <td><a class="btn secondary-btn" href="">Edit</a> <form action="" class="d-inline"><button type="submit" class="btn danger-btn">Delete</button></form></td>
+                                        <td>{{$category->id}}</td>
+                                        <td>{{$category->category_name}}</td>
+                                        <td><a class="btn secondary-btn" href="{{route('category.edit',['category'=>$category])}}">Edit</a> 
+                                            <form action="{{route('category.destroy',['category'=>$category->id])}}" id="categoryDestroyForm" class="d-inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button id="categoryDestroyBtn" class="btn danger-btn">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Brand ambasodoer</td>
-                                        <td><a class="btn secondary-btn " href="">Edit</a> <form action="" class="d-inline"><button class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Communications</td>
-                                        <td><a class="btn secondary-btn " href="">Edit</a> <form action="" class="d-inline"><button class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
+                                    @endforeach
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -199,21 +158,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Admin</td>
-                                        <td ><a class="btn secondary-btn" href="">Edit</a> <form action="" class="d-inline"><button type="submit" class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>User</td>
-                                        <td><a class="btn secondary-btn " href="">Edit</a> <form action="" class="d-inline"><button class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Author</td>
-                                        <td><a class="btn secondary-btn " href="">Edit</a> <form action="" class="d-inline"><button class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
+                                    @foreach($roles as $index=>$role)
+                                        <tr>
+                                            <td>{{$index+1}}</td>
+                                            <td>{{$role}}</td>
+                                            <td><a class="btn secondary-btn" href="">Edit</a> <form action="" class="d-inline"><button type="submit" class="btn danger-btn">Delete</button></form></td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -229,25 +180,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Create_post</td>
-                                        <td ><a class="btn secondary-btn" href="">Edit</a> <form action="" class="d-inline"><button type="submit" class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>User</td>
-                                        <td><a class="btn secondary-btn " href="">Edit</a> <form action="" class="d-inline"><button class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Author</td>
-                                        <td><a class="btn secondary-btn " href="">Edit</a> <form action="" class="d-inline"><button class="btn danger-btn">Delete</button></form></td>
-                                    </tr>
+                                    @foreach($permissions as $index=>$permission)
+                                        <tr>
+                                            <td>{{$index+1}}</td>
+                                            <td>{{$permission}}</td>
+                                            <td><a class="btn secondary-btn" href="">Edit</a> 
+                                            <form action="" class="d-inline"><button type="submit" class="btn danger-btn">Delete</button></form></td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <div role="tabpanel" class="tab-pane" id="role-have-permission-tab">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Role</th>
+                                        <th>Permissions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($rolesHavePermissions as $index=>$role)
+                                        <tr>
+                                            <td>{{$index+1}}</td>
+                                            <td>
+                                                {{$role->name}}
+                                            </td>
+                                            <td>
+                                                @if($role->permissions->count() == 0)
+                                                    <span class="badge badge-primary">basic auth permissions</span>
+                                                @else
+                                                    @foreach ($role->permissions as $permission)
+                                                        <span class="badge badge-primary">{{$permission->name}}</span>
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
           </div>
@@ -255,6 +232,20 @@
     </div>
   </div>
 @endSection
+
+@push('js')
+<script>
+     $(document).ready(function(){
+        //delete category 
+        $('#categoryDestroyBtn').click(function(e){
+            e.preventDefault();
+            if(window.confirm('Are you sure you want delete the Category?')){
+                $('#categoryDestroyForm').submit();
+            }
+        })
+    })
+</script>
+@endpush
 
 @push('css')
 <style>

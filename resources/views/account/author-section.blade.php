@@ -65,10 +65,10 @@
                               <div class="col-sm-12 col-md-12">
                                   <div class="card">
                                       <div class="card-body text-center">
-                                          <img src="{{asset('images/companies/vertisk.jpg')}}" width="80px" class="img-fluid border" alt="">
-                                          <h5>World Vision International Nepal</h5>
-                                          <small>NGO / INGO / Development Projects</small>
-                                        <a class="d-block" href="/company-webisite"><i class="fas fa-globe"></i></a>
+                                          <img src="{{asset($company->logo)}}" width="100px" class="img-fluid border p-2" alt="">
+                                          <h5>{{$company->title}}</h5>
+                                          <small>{{$company->getCategory->category_name}}</small>
+                                        <a class="d-block" href="{{$company->website}}"><i class="fas fa-globe"></i></a>
                                       </div>
                                   </div>
                               </div>

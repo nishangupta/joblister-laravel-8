@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-white bg-white shadow" id="navbar">
+<nav class="navbar navbar-expand-md navbar-white bg-white shadow sticky-top" id="navbar">
   <div class="container">
   <a href="{{URL('/')}}" class="navbar-brand">
       JobLister
@@ -15,51 +15,24 @@
         <button class="dropdown-item" type="button">Arabic</button>
       </div>
     </div> --}}
-    {{-- <ul class="navbar-nav ml-auto">
-      
-      <li class="nav-item dropdown">
-        <a href="#" class="primary-btn dropdown-toggle" data-toggle="dropdown"><i class="fas fa-account"></i> Account</a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
-          <a class="dropdown-item" href="{{route('account.index')}}">
-            <div class="text-center">
-                <img src="{{asset('images/user-profile.png')}}" alt="user profile" width="50px" class="img-fluid rounded-circle">
-              <div class="">
-                <p class="text-uppercase">{{auth()->user()->name}}</p>
-                <p class="">{{auth()->user()->email}}</p>
-              </div>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{route('account.changePassword')}}">
-            <span class="dropdown-link" >Change Password</span>
-          </a>
-        </div>
-      </li>
-    </ul> --}}
+
     <ul class="navbar-nav ml-auto">
       @auth
-      <li class="nav-item dropdown">
-        <a href="#" class="primary-btn dropdown-toggle" data-toggle="dropdown"><i class="fas fa-account"></i> Account</a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
-          <a class="dropdown-item" href="{{route('account.index')}}">
-            <div class="text-center">
-                <img src="{{asset('images/user-profile.png')}}" alt="user profile" width="50px" class="img-fluid rounded-circle">
-              <div class="">
-                <p class="text-uppercase">{{auth()->user()->name}}</p>
-                <p class="">{{auth()->user()->email}}</p>
-              </div>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{route('account.changePassword')}}">
-            <span class="dropdown-link" >Change Password</span>
-          </a>
-          <a class="dropdown-item" href="{{route('account.index')}}">
-            <span class="dropdown-link" >User Account</span>
-          </a>
-          <a class="dropdown-item" href="{{route('account.logout')}}">
-            <span class="dropdown-link">Logout</span>
-          </a>
+      <li class="nav-item dropdown"> 
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{auth()->user()->name}}</span> 
+          <img class="img-profile rounded-circle" src="{{asset('images/user-profile.png')}}" width="40px"> 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"> 
+          <a class="dropdown-item" href="{{route('account.dashboard')}}"> <i class="fas fa-cogs fa-sm "></i> Dashboard</a> 
+          <a class="dropdown-item" href="{{route('account.authorSection')}}"> <i class="fa fa-cogs fa-sm "></i> Author Dashboard </a> 
+          <a class="dropdown-item" href="{{route('account.index')}}"> <i class="fas fa-user fa-sm "></i> Profile </a> 
+          <a class="dropdown-item" href="{{route('account.changePassword')}}"> <i class="fas fa-key fa-sm "></i> Change Password </a> 
+            <div class="dropdown-divider"></div> 
+            <a class="dropdown-item" href="{{route('account.logout')}}"> 
+              <i class="fas fa-sign-out-alt"></i> 
+              Logout 
+            </a>
         </div>
       </li>
       @endauth
@@ -67,6 +40,7 @@
       <a href="/login" class="primary-btn">Sign up or Log in</a>
       @endguest
     </ul>
+    
     {{-- <div class="mb-nav">
       <a href="#" class="nav-link mb-nav-toggler"><i class="fas fa-bars"></i></a>
       <div class="mb-nav-list">

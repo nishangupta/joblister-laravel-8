@@ -34,6 +34,3 @@
   </div>
 @endSection
 
-@push('css')
-
-@endpush

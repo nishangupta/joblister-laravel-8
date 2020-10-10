@@ -3,14 +3,23 @@
     @role('admin')
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'dashboard' ? 'active': ''}}">
       <a href="{{route('account.dashboard')}}" class="account-nav-link">
-        <i class="fas fa-user-shield"></i> Dashboard
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+    </li>
+    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'manage-authors' ? 'active': ''}}">
+      <a href="{{route('account.manageAuthors')}}" class="account-nav-link">
+        <i class="fas fa-users"></i> Manage Authors
       </a>
     </li>
     @endrole
     @role('author')
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'author-section' ? 'active': ''}}">
       <a href="{{route('account.authorSection')}}" class="account-nav-link">
-        <i class="fas fa-user-shield"></i> Author Section
+        <i class="fas fa-chart-line"></i> Author Section
+    </li>
+    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'post' && request()->segment(3) == 'create' ? 'active': ''}}">
+      <a href="{{route('post.create')}}" class="account-nav-link">
+        <i class="fas fa-plus-square"></i> Create Job listing
     </li>
     @endrole
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'overview' ? 'active': ''}}">
@@ -25,7 +34,7 @@
     </li>    
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'my-saved-jobs' ? 'active': ''}}">
       <a href="{{route('account.savedList')}}" class="account-nav-link">
-        <i class="fas fa-list"></i> My saved Jobs
+        <i class="fas fa-stream"></i> My saved Jobs
       </a>
     </li>   
      <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'deactivate' ? 'active': ''}}">

@@ -105,6 +105,7 @@ class CompanyController extends Controller
      */
     public function destroy()
     {
+        Storage::delete('public/companies/logos/' . basename(auth()->user()->company->logo));
         if (auth()->user()->company->delete()) {
             return redirect()->route('account.authorSection');
         }
