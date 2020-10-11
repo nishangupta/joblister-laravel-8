@@ -21,6 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->string('title', 50);
             $table->text('description');
             $table->string('website');
+            $table->string('cover_img');
             $table->timestamps();
         });
     }

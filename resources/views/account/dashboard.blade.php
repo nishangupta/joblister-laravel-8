@@ -2,16 +2,16 @@
 
 @section('content')
   <div class="account-layout border">
-    <div class="account-hdr border " >
+    <div class="account-hdr border" >
       Dashboard
     </div>
     <div class="account-bdy p-3">
         <div class="row mb-3">
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card text-white h-100 shadow">
+              <div class="card dashboard-card text-white h-100 shadow">
                   <div class="card-body primary-bg">
                       <div class="rotate">
-                          <i class="fa fa-user fa-4x"></i>
+                          <i class="fas fa-users fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Users</h6>
                       <h1 class="">134</h1>
@@ -19,10 +19,10 @@
               </div>
           </div>
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card text-white  h-100 shadow">
+              <div class="card dashboard-card text-white  h-100 shadow">
                   <div class="card-body bg-secondary">
                       <div class="rotate">
-                          <i class="fa fa-list fa-4x"></i>
+                          <i class="fas fa-building fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Jobs</h6>
                       <h1 class="">87</h1>
@@ -30,10 +30,10 @@
               </div>
           </div>
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card text-white h-100 shadow">
+              <div class="card dashboard-card text-white h-100 shadow">
                   <div class="card-body bg-info">
                       <div class="rotate">
-                          <i class="fa fa-user fa-4x"></i>
+                          <i class="fas fa-user-tie fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Authors</h6>
                       <h1 class="">125</h1>
@@ -245,33 +245,4 @@
         })
     })
 </script>
-@endpush
-
-@push('css')
-<style>
-  .card {
-    overflow:hidden;
-}
-
-.card-body .rotate {
-    z-index: 8;
-    float: right;
-    height: 100%;
-}
-
-.card-body .rotate i {
-    color: rgba(20, 20, 20, 0.15);
-    position: absolute;
-    left: 0;
-    left: auto;
-    right: -10px;
-    bottom: 0;
-    display: block;
-    -webkit-transform: rotate(-44deg);
-    -moz-transform: rotate(-44deg);
-    -o-transform: rotate(-44deg);
-    -ms-transform: rotate(-44deg);
-    transform: rotate(-44deg);
-}
-</style>
 @endpush

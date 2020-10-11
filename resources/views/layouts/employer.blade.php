@@ -8,9 +8,9 @@
                 <div class="col-sm-12 col-md-4 pr-md-0 pr-sm-3">
                   <div class="card">
                     <div class="card-body">
-                      <img src="{{asset($author->company->logo)}}" class="img-fluid" alt="">
-                      <h6>{{$author->company->title}}</h6>
-                      <p>{{$author->company->getCategory->category_name}}</p>
+                      <img src="{{asset($company->logo)}}" class="img-fluid" alt="">
+                      <h6>{{$company->title}}</h6>
+                      <p>{{$company->getCategory->category_name}}</p>
                     </div>
                   </div>    
                 </div>

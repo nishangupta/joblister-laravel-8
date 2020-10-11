@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -34,7 +35,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        return view('post.create');
+        $this->requestValidate($request);
+
+        $postData = array_merge(['company_id' => auth()->user()->company->id], $request->all());
+
+        $post = Post::create($postData);
+        if ($post) {
+            return redirect()->route('account.authorSection');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -80,5 +89,22 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function requestValidate($request)
+    {
+        return $request->validate([
+            'job_title' => 'required|min:3',
+            'job_level' => 'required',
+            'vacancy_count' => 'required|int',
+            'employment_type' => 'required',
+            'job_location' => 'required',
+            'salary' => 'required',
+            'deadline' => 'required',
+            'education_level' => 'required',
+            'experience' => 'required',
+            'skills' => 'required',
+            'specifications' => 'sometimes|min:5',
+        ]);
     }
 }

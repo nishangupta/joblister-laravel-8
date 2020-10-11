@@ -8,10 +8,10 @@
     <div class="account-bdy p-3">
         <div class="row mb-3">
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card text-white h-100 shadow">
+              <div class="card dashboard-card text-white h-100 shadow">
                   <div class="card-body primary-bg">
                       <div class="rotate">
-                          <i class="fa fa-user fa-4x"></i>
+                          <i class="fas fa-users fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">My Posts</h6>
                       <h1 class="">134</h1>
@@ -19,10 +19,10 @@
               </div>
           </div>
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card text-white  h-100 shadow">
-                  <div class="card-body bg-secondary">
+              <div class="card dashboard-card text-white  h-100 shadow">
+                  <div class="card-body bg-info">
                       <div class="rotate">
-                          <i class="fa fa-list fa-4x"></i>
+                          <i class="fas fa-th fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Live Posts</h6>
                       <h1 class="">87</h1>
@@ -30,10 +30,10 @@
               </div>
           </div>
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card text-white h-100 shadow">
-                  <div class="card-body bg-info">
+              <div class="card dashboard-card text-white h-100 shadow">
+                  <div class="card-body bg-danger">
                       <div class="rotate">
-                          <i class="fa fa-user fa-4x"></i>
+                          <i class="fas fa-envelope fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Notifications</h6>
                       <h1 class="">125</h1>
@@ -49,8 +49,11 @@
                       <div class="card-body">
                           <h4 class="card-title">Manage Company Details</h4>
                           <p class="mb-3 alert alert-info">For job listings you need to add Company details.</p>
+                          
                           <div class="mb-3 d-flex">
+                            @if(!$company)
                             <a href="{{route('company.create')}}" class="btn primary-btn mr-2">Create Company</a>
+                            @else
                             <a href="{{route('company.edit')}}" class="btn secondary-btn mr-2">Edit Company</a>
                             <div class="ml-auto">
                                 <form action="{{route('company.destroy')}}" id="companyDestroyForm" method="POST">
@@ -59,8 +62,9 @@
                                     <button type="submit" id="companyDestroyBtn" class="btn danger-btn">Delete Company</a>
                                 </form>
                             </div>
+                            @endif
                           </div>
-
+                          @if($company)
                           <div class="row">
                               <div class="col-sm-12 col-md-12">
                                   <div class="card">
@@ -73,7 +77,7 @@
                                   </div>
                               </div>
                           </div>
-                          
+                          @endif
                       </div>
                   </div>
               </div>
@@ -90,35 +94,36 @@
               </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead class="thead-inverse">
                         <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>Email</th>
+                            <th>Level</th>
+                            <th>No of vacancies</th>
                             <th>Deadline</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($company->posts as $post)
                         <tr>
-                            <td>1</td>
-                            <td>Nishant</td>
-                            <td>nishant@nishant.com</td>
-                            <td>12</td>
+                            <td>{{$post->id}}</td>
+                            <td>{{$post->job_title}}</td>
+                            <td>{{$post->job_level}}</td>
+                            <td>{{$post->vacancy_count}}</td>
+                            <td>@php 
+                                $date = new DateTime($post->deadline);
+                                $timestamp =  $date->getTimestamp();
+                                $dayMonthYear = date('d/m/Y',$timestamp);
+                                $daysLeft = date('d', $timestamp - time()) .' days remaining';
+                                echo "$dayMonthYear <br> <span class='text-danger'> $daysLeft </span>";
+                            @endphp</td>
                             <td>
-                              <button class="btn primary-btn">View Profile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minasd</td>
-                            <td>asd@asd.com</td>
-                            <td>2</td>
-                            <td>
-                            <button class="btn primary-btn">View Profile</button>
+                            <button class="btn primary-btn">View Post</button>
                             </td> 
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -130,35 +135,6 @@
     </div>
   </div>
 @endSection
-
-@push('css')
-<style>
-  .card {
-    overflow:hidden;
-}
-
-.card-body .rotate {
-    z-index: 8;
-    float: right;
-    height: 100%;
-}
-
-.card-body .rotate i {
-    color: rgba(20, 20, 20, 0.15);
-    position: absolute;
-    left: 0;
-    left: auto;
-    right: -10px;
-    bottom: 0;
-    display: block;
-    -webkit-transform: rotate(-44deg);
-    -moz-transform: rotate(-44deg);
-    -o-transform: rotate(-44deg);
-    -ms-transform: rotate(-44deg);
-    transform: rotate(-44deg);
-}
-</style>
-@endpush
 
 @push('js')
 <script>

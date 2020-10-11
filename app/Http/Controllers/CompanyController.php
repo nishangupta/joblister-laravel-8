@@ -58,7 +58,6 @@ class CompanyController extends Controller
         if ($this->companySave($company, $request)) {
             return redirect()->route('account.authorSection');
         }
-
         return redirect()->route('account.authorSection');
     }
 
@@ -67,12 +66,13 @@ class CompanyController extends Controller
         return $request->validate([
             'title' => 'required|min:5',
             'description' => 'required|min:5',
-            'logo' => 'required|image|max:3999',
+            'logo' => 'required|image|max:2999',
             'category' => 'required|string',
             'website' => 'required|string',
+            'cover_img' => 'sometimes|image|max:3999'
         ]);
     }
-    public function companySave(Company $company, Request $request)
+    protected function companySave(Company $company, Request $request)
     {
         $company->user_id = auth()->user()->id;
         $company->title = $request->title;
@@ -80,29 +80,40 @@ class CompanyController extends Controller
         $company->company_category_id = $request->category;
         $company->website = $request->website;
 
-        if ($request->hasFile('logo')) {
-            $fileName = $request->file('logo')->getClientOriginalName();
-            $actualFileName = pathinfo($fileName, PATHINFO_FILENAME);
-            $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-            $fileNameToStore = $actualFileName . time() . '.' . $fileExtension;
-            $path = $request->file('logo')->storeAs('public/companies/logos', $fileNameToStore);
-
-            if ($company->logo) {
-                Storage::delete('public/companies/logos/' . basename($company->logo));
-            }
-            $company->logo = 'storage/companies/logos/' . $fileNameToStore;
+        //logo
+        $fileNameToStore = $this->getFileName($request->file('logo'));
+        $logoPath = $request->file('logo')->storeAs('public/companies/logos', $fileNameToStore);
+        if ($company->logo) {
+            Storage::delete('public/companies/logos/' . basename($company->logo));
         }
+        $company->logo = 'storage/companies/logos/' . $fileNameToStore;
+
+        //cover image 
+        if ($request->hasFile('cover_img')) {
+            $fileNameToStore = $this->getFileName($request->file('cover_img'));
+            $logoPath = $request->file('logo')->storeAs('public/companies/logos', $fileNameToStore);
+            if ($company->cover_img) {
+                Storage::delete('public/companies/cover/' . basename($company->cover_img));
+            }
+            $company->cover_img = 'storage/companies/cover/' . $fileNameToStore;
+        } else {
+            $company->cover_img = 'nocover';
+        }
+
         if ($company->save()) {
             return true;
         }
         return false;
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    protected function getFileName($file)
+    {
+        $fileName = $file->getClientOriginalName();
+        $actualFileName = pathinfo($fileName, PATHINFO_FILENAME);
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+        return $actualFileName . time() . '.' . $fileExtension;
+    }
+
     public function destroy()
     {
         Storage::delete('public/companies/logos/' . basename(auth()->user()->company->logo));
