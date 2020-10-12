@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DateTime;
 
 class Post extends Model
 {
@@ -16,4 +17,11 @@ class Post extends Model
         'education_level', 'experience',
         'skills', 'specifications'
     ];
+
+    public $post;
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
 }

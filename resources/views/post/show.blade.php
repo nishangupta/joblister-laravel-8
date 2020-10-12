@@ -11,33 +11,33 @@
                 <div class="banner-overlay"></div>
                   <img src="{{asset('images/companies/banner.jpg')}}" class="company-banner-img img-fluid" alt="">
                   <div class="company-media">
-                    <img src="{{asset('images/companies/muncha.jpg')}}" alt="" class="company-logo">
+                    <img src="{{asset($post->company->logo)}}" alt="" class="company-logo">
                     <div>
                       <a href="/company-list" class="company-link">
-                        <p class="company-name">Real Solutions</p>
-                        <p class="company-category">Consulting/Legal</p>
+                        <p class="company-name">{{$post->company->title}}</p>
+                      <p class="company-category">{{$post->company->getCategory->category_name}}</p>
                       </a>
                     </div>
                   </div>
                   <div class="company-website">
-                    <a href="companywebiste.com" target="_blank"><i class="fas fa-globe"></i></a>
+                    <a href="{{$post->company->website}}" target="_blank"><i class="fas fa-globe"></i></a>
                   </div>
               </div>
               
               {{-- company information --}}
               <div class="p-3">
-                <p class="">Real Solutions Private Limited, an ISO: 9001:2015 certified company, is an independent consulting firm that specializes in providing a complete or sectional Human Resource Management support to the National and International Organizations in Nepal.</p>
+                <p>{{$post->company->description}}</p>
               </div>
             </div>
 
             {{-- job information --}}
               <div class="job-info">
                 <div class="job-hdr p-3">
-                    <p class="job-title">Finance Executive</p>
+                    <p class="job-title">{{$post->job_title}}</p>
                     <div class="">
                       <p class="job-views"> 
-                        <span class="text-success">Views: 623 </span>  | 
-                        <span class="text-danger">Apply Before: 6 days</span>
+                        <span class="text-success">Views: {{$post->views}} </span>  | 
+                        <span class="text-danger">Apply Before: {{$post->deadline}}</span>
                       </p>
                     </div>
                 </div>
@@ -49,32 +49,32 @@
                         <tr>
                           <td width="33%">Job Category</td>
                           <td width="3%">:</td>
-                          <td width="64%"><a href="/jobs"> Accounting / Finance</a></td>
+                          <td width="64%"><a href="/jobs"> {{$post->job_category}}</a></td>
                         </tr>
                         <tr>
                           <td width="33%">Job Level</td>
                           <td width="3%">:</td>
-                          <td width="64%">Mid level</td>
+                          <td width="64%">{{$post->job_level}}</td>
                         </tr>
                         <tr>
                           <td width="33%">No of vacancy[s]</td>
                           <td width="3%">:</td>
-                          <td width="64%">1</td>
+                          <td width="64%">{{$post->vacancy_count}}</td>
                         </tr>
                         <tr>
                           <td width="33%">Employment type</td>
                           <td width="3%">:</td>
-                          <td width="64%">full time</td>
+                          <td width="64%">{{$post->employment_type}}</td>
                         </tr>
                         <tr>
-                          <td width="33%">Offered Salary</td>
+                          <td width="33%">Offered Salary(Monthly)</td>
                           <td width="3%">:</td>
-                          <td width="64%">Nrs 300000 - 500000 monthly<</td>
+                          <td width="64%">{{$post->salary}}</td>
                         </tr>
                         <tr>
-                          <td width="33%">Apply before(Deadline</td>
+                          <td width="33%">Apply before(Deadline)</td>
                           <td width="3%">:</td>
-                          <td width="64%">Oct,12,2020 (6 days from now)</td>
+                          <td width="64%">Oct,12,2020 ({{$post->deadline}} days from now)</td>
                         </tr>
                       </tbody>
                     </table>
@@ -86,12 +86,12 @@
                         <tr>
                           <td width="33%">Education level</td>
                           <td width="3%">:</td>
-                          <td width="64%"><a href="/jobs"> Bachelors</a></td>
+                          <td width="64%"><a href="/jobs"> {{$post->education_level}}</a></td>
                         </tr>
                         <tr>
                           <td width="33%">Experience Required</td>
                           <td width="3%">:</td>
-                          <td width="64%">More than or equal to 3 years</td>
+                          <td width="64%">{{$post->experience}}</td>
                         </tr>
                         <tr>
                           <td width="33%">Professional Skill Required</td>
@@ -101,11 +101,18 @@
                             <span class="badge badge-primary">Multitasking</span>
                             <span class="badge badge-primary">Comunitcation</span>
                             <span class="badge badge-primary">Interpretational</span>
+                            {{$post->skills}}
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
+
+                  <div class="job-level-description">
+                    {{-- <p class="font-weight-bold">More Specifications</p> --}}
+                    <p class="py-2">{!!$post->specifications!!}</p>                    
+                  </div>
+
                   <br>
                   <hr>
                   <div class="d-flex justify-content-between">
@@ -117,7 +124,6 @@
                       <a href="www.gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i></a>
                     </div>
                   </div>
-                
                 </div>
               </div>
           </div>
@@ -142,7 +148,7 @@
                   <img src="{{asset('images/companies/vertisk.jpg')}}" class="company-logo" alt="">
                   <div class="job-desc">
                     <a href="/job" class="job-category">Finance Assistant</a>
-                    <p class="company-name">Sanghai Greenland Intl</p>
+                    <p class="small">Sanghai Greenland Intl</p>
                     <p class="company-name text-danger">Deadline: 6 days</p>
                   </div>
                 </div>
@@ -189,13 +195,11 @@
    padding-right: 2rem;
  }
  .company-logo{
-   width:80px;
-   height:auto;
+  width:100px;
+  height:auto;
   margin-right: 1rem;
- }
- .company-name{
-  font-weight: bold;
-   font-size:1.2rem;
+  padding:1rem;
+  background-color: white;
  }
  .company-category{
   font-size:1.3rem;
@@ -233,7 +237,6 @@
  }
  .company-name{
   font-weight: normal;
-  font-size:.75rem;
  }
 
 </style>

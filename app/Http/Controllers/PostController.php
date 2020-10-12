@@ -54,7 +54,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('post.show');
+        $post = Post::findOrFail($id)->with('company')->first();
+        return view('post.show')->with([
+            'post' => $post
+        ]);
     }
 
     /**
