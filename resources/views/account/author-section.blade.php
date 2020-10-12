@@ -106,10 +106,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($company->posts as $post)
+                        @foreach($company->posts as $index=>$post)
                         <tr>
-                            <td>{{$post->id}}</td>
-                            <td>{{$post->job_title}}</td>
+                            <td>{{$index+1}}</td>
+                            <td> <a href="" title="Go to this post">{{$post->job_title}}</a></td>
                             <td>{{$post->job_level}}</td>
                             <td>{{$post->vacancy_count}}</td>
                             <td>@php 
@@ -120,7 +120,12 @@
                                 echo "$dayMonthYear <br> <span class='text-danger'> $daysLeft </span>";
                             @endphp</td>
                             <td>
-                            <button class="btn primary-btn">View Post</button>
+                            <a href="{{route('post.edit',['post'=>$post])}}" class="btn primary-btn">Edit</a>
+                            <form action="{{route('post.destroy',['post'=>$post->id])}}" class="d-inline-block" id="delPostForm" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" id="delPostBtn" class="btn danger-btn">Delete</button>
+                            </form>
                             </td> 
                         </tr>
                         @endforeach

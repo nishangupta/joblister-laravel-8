@@ -10,13 +10,13 @@
         <div class="card-body">
 
             @foreach ( $company->posts as $post)
-            <div class="row mb-4">
-              <div class="col-sm-12 col-md-3">
-                <div class="border p-2  d-flex align-items-center">
+            <div class="row mb-4 shadow py-2">
+              <div class="d-none d-md-block col-md-3">
+                <div class="border p-2 d-flex align-items-center">
                   <img src="{{asset($company->logo)}}" class="img-fluid" alt="">
                 </div>
               </div>
-              <div class="col-sm-12 col-md-9">
+              <div class="col-xs-12 col-md-9">
                 <div class="p-sm-3 p-md-0">
                   <a href="" class="secondary-link pb-2 d-block"><h5 class="font-weight-bold">{{$post->job_title}}</h5></a>
                   <p class="h6">{{$company->title}}</p>
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-            <hr>
+            {{-- <hr> --}}
             @endforeach
 
         </div>

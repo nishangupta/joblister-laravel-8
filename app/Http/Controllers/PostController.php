@@ -63,9 +63,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        return view('post.edit');
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -75,9 +75,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $post)
     {
-        //
+        $this->requestValidate($request);
+        $getPost = Post::findOrFail($post);
+
+        $newPost = $getPost->update($request->all());
+        if ($newPost) {
+            return redirect()->route('account.authorSection');
+        }
+        return redirect()->route('post.index');
     }
 
     /**
@@ -86,9 +93,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if ($post->delete()) {
+            return redirect()->route('account.authorSection');
+        }
+        return redirect()->back();
     }
 
     protected function requestValidate($request)

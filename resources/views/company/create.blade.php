@@ -49,7 +49,7 @@
         <div class="form-group">
           <div class="py-3">
             <p>Company Website Url</p>
-            <p class="text-primary">For example : Https://www.examplecompany.com</p>
+            <p class="text-primary">For example : https://www.examplecompany.com</p>
           </div>
           <input type="text" placeholder="Company Website" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ old('website')}}" required>
             @error('website')

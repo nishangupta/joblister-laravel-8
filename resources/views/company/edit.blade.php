@@ -60,6 +60,21 @@
                 </span>
             @enderror
         </div>
+
+        <div class="pb-3">
+          <div class="py-3">
+            <p>Company banner/cover</p>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="validatedCustomFile" name="cover_img" required>
+            <label class="custom-file-label" for="validatedCustomFile">Choose cover img...</label>
+            @error('cover_img')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+          </div>
+        </div>
    
         <div class="pt-2">
           <p class="mt-3 alert alert-primary">Provide a short paragraph description about your company</p>
