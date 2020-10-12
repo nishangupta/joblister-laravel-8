@@ -18,6 +18,12 @@ class Post extends Model
         'skills', 'specifications'
     ];
 
+    //user post piviot for savedJobs
+    public function users()
+    {
+        return $this->hasMany('App\Models\User');
+    }
+
     public function company()
     {
         return $this->belongsTo('App\Models\Company');

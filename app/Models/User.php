@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Company');
     }
+
+    //piviot for saved jobs
+    public function posts()
+    {
+        return $this->belongsToMany('App\Models\Post');
+    }
 }

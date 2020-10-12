@@ -12,7 +12,7 @@ class AuthorController extends Controller
     public function authorSection()
     {
         if ($this->hasCompany()) {
-            $company = auth()->user()->company->with('posts')->first();
+            $company = auth()->user()->company->first()->with('posts')->first();
             return view('account.author-section')->with([
                 'company' => $company,
             ]);

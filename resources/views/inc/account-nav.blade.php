@@ -33,7 +33,7 @@
       </a>
     </li>    
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'my-saved-jobs' ? 'active': ''}}">
-      <a href="{{route('account.savedList')}}" class="account-nav-link">
+      <a href="{{route('savedJob.index')}}" class="account-nav-link">
         <i class="fas fa-stream"></i> My saved Jobs
       </a>
     </li>   

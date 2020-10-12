@@ -6,22 +6,12 @@ use App\Http\Controllers\Auth\AuthorController;
 use App\Http\Controllers\CompanyCategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\savedJobController;
 use App\Models\CompanyCategory;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
-
-Route::get('/carbon', function () {
-  $par = Carbon::parse('2020-10-11 17:16:13');
-
-  // $answer = Carbon::now()->toDateString();
-  $answer = $par->timestamp;
-  dd($answer);
-});
 
 //public routes
 Route::get('/', [PostController::class, 'index'])->name('post.index');
@@ -35,9 +25,12 @@ Route::middleware('auth')->prefix('account')->group(function () {
   Route::get('overview', [AccountController::class, 'index'])->name('account.index');
   Route::get('deactivate', [AccountController::class, 'deactivateView'])->name('account.deactivate');
   Route::get('change-password', [AccountController::class, 'changePasswordView'])->name('account.changePassword');
-  Route::get('my-saved-jobs', [AccountController::class, 'savedList'])->name('account.savedList');
   Route::delete('delete', [AccountController::class, 'deleteAccount'])->name('account.delete');
   Route::put('change-password', [AccountController::class, 'changePassword'])->name('account.changePassword');
+  //savedJobs
+  Route::get('my-saved-jobs', [savedJobController::class, 'index'])->name('savedJob.index');
+  Route::get('my-saved-jobs/{id}', [savedJobController::class, 'store'])->name('savedJob.store');
+  Route::delete('my-saved-jobs/{id}', [savedJobController::class, 'destroy'])->name('savedJob.destroy');
 
   //Admin Routes
   Route::group(['middleware' => ['role:admin']], function () {
@@ -67,10 +60,6 @@ Route::middleware('auth')->prefix('account')->group(function () {
     Route::delete('company', [CompanyController::class, 'destroy'])->name('company.destroy');
   });
 });
-
-Route::post('/postsubmit', function (Request $request) {
-  dd($request->all());
-})->name('postsubmit');
 
 //admins
 // Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');

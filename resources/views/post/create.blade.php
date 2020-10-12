@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="account-layout border">
-    <div class="account-hdr border">
+    <div class="account-hdr bg-primary text-white border">
       Create Job listings
     </div>
     <div class="account-bdy p-3">
@@ -27,9 +27,9 @@
                 <div class="col-md-6">
                   <label for="">Job level</label>
                   <select name="job_level" class="form-control" value="{{old('job_level')}}" required>
-                    <option value="Top level">Top level</option>
                     <option value="Senior level">Senior level</option>
                     <option value="Mid level">Mid level</option>
+                    <option value="Top level">Top level</option>
                     <option value="Entry level">Entry level</option>
                   </select>
                 </div>

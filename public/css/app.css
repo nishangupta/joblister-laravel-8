@@ -11984,6 +11984,10 @@ button {
   font-weight: bold;
 }
 
+.bg-primary {
+  background-color: #185a91 !important;
+}
+
 .home-page {
   padding: 2rem;
   background: linear-gradient(to bottom right, #0261a6, #022c5a);

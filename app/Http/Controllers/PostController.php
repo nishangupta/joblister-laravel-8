@@ -57,9 +57,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id)->with('company', 'company.getCategory')->firstOrFail();
+        $post = Post::findOrFail($id);
+
         return view('post.show')->with([
-            'post' => $post
+            'post' => $post,
+            'company' => $post->company
         ]);
     }
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="account-layout border">
-  <div class="account-hdr border " >
+  <div class="account-hdr bg-primary text-white border " >
     Edit Company Category
   </div>
   <div class="account-bdy p-3">

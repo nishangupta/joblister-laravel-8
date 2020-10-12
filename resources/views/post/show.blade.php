@@ -11,22 +11,22 @@
                 <div class="banner-overlay"></div>
                   <img src="{{asset('images/companies/banner.jpg')}}" class="company-banner-img img-fluid" alt="">
                   <div class="company-media">
-                    <img src="{{asset($post->company->logo)}}" alt="" class="company-logo">
+                    <img src="{{asset($company->logo)}}" alt="" class="company-logo">
                     <div>
-                      <a href="{{route('account.employer',['employer'=>$post->company])}}" class="company-link">
-                        <p class="company-name">{{$post->company->title}}</p>
-                      <p class="company-category">{{$post->company->getCategory->category_name}}</p>
+                      <a href="{{route('account.employer',['employer'=>$company])}}" class="company-link">
+                        <p class="company-name">{{$company->title}}</p>
+                      <p class="company-category">{{$company->getCategory->category_name}}</p>
                       </a>
                     </div>
                   </div>
                   <div class="company-website">
-                    <a href="{{$post->company->website}}" target="_blank"><i class="fas fa-globe"></i></a>
+                    <a href="{{$company->website}}" target="_blank"><i class="fas fa-globe"></i></a>
                   </div>
               </div>
               
               {{-- company information --}}
               <div class="p-3">
-                <p>{{$post->company->description}}</p>
+                <p>{{$company->description}}</p>
               </div>
             </div>
 
@@ -49,7 +49,7 @@
                         <tr>
                           <td width="33%">Job Category</td>
                           <td width="3%">:</td>
-                          <td width="64%"><a href="/jobs">{{$post->company->getCategory->category_name}}</a></td>
+                          <td width="64%"><a href="/jobs">{{$company->getCategory->category_name}}</a></td>
                         </tr>
                         <tr>
                           <td width="33%">Job Level</td>
@@ -105,16 +105,15 @@
                       </tbody>
                     </table>
                   </div>
-
                   <div class="job-level-description">
                     {{-- <p class="font-weight-bold">More Specifications</p> --}}
                     <p class="py-2">{!!$post->specifications!!}</p>                    
                   </div>
-
+                  
                   <br>
                   <hr>
                   <div class="d-flex justify-content-between">
-                    <button class="btn primary-btn">Apply now</button>
+                    <a href="{{route('savedJob.store',['id'=>$post])}}" class="btn primary-btn">Apply now</a>
                     <div class="social-links">
                       <a href="www.facebook.com" class="btn btn-primary"><i class="fab fa-facebook"></i></a>
                       <a href="www.twitter.com" class="btn btn-primary"><i class="fab fa-twitter"></i></a>

@@ -31,7 +31,7 @@
                         @endphp day[s] from now</span>
                     </div>
                     <div class="text-info">
-                      <i class="fas fa-eye"></i> <span>Views: 4703</span>
+                      <i class="fas fa-eye"></i> <span>Views: {{$post->views}}</span>
                     </div>
                   </div>
                 </div>
