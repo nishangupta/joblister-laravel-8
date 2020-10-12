@@ -18,7 +18,7 @@
               </div>
               <div class="col-xs-12 col-md-9">
                 <div class="p-sm-3 p-md-0">
-                  <a href="" class="secondary-link pb-2 d-block"><h5 class="font-weight-bold">{{$post->job_title}}</h5></a>
+                  <a href="{{route('post.show',['job'=>$post])}}" class="secondary-link pb-2 d-block"><h5 class="font-weight-bold">{{$post->job_title}}</h5></a>
                   <p class="h6">{{$company->title}}</p>
                   <p class="small"><i class="fas fa-map-marker-alt"></i> {{$post->job_location}}</p>
                   <p class="small"><i class="fas fa-lightbulb"></i> {{$post->skills}}</p>

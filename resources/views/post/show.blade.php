@@ -13,7 +13,7 @@
                   <div class="company-media">
                     <img src="{{asset($post->company->logo)}}" alt="" class="company-logo">
                     <div>
-                      <a href="/company-list" class="company-link">
+                      <a href="{{route('account.employer',['employer'=>$post->company])}}" class="company-link">
                         <p class="company-name">{{$post->company->title}}</p>
                       <p class="company-category">{{$post->company->getCategory->category_name}}</p>
                       </a>
@@ -37,7 +37,7 @@
                     <div class="">
                       <p class="job-views"> 
                         <span class="text-success">Views: {{$post->views}} </span>  | 
-                        <span class="text-danger">Apply Before: {{$post->deadline}}</span>
+                        <span class="text-danger">Apply Before: {{date('d',$post->remainingDays())}} days</span>
                       </p>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <tr>
                           <td width="33%">Job Category</td>
                           <td width="3%">:</td>
-                          <td width="64%"><a href="/jobs"> {{$post->job_category}}</a></td>
+                          <td width="64%"><a href="/jobs">{{$post->company->getCategory->category_name}}</a></td>
                         </tr>
                         <tr>
                           <td width="33%">Job Level</td>
@@ -74,7 +74,7 @@
                         <tr>
                           <td width="33%">Apply before(Deadline)</td>
                           <td width="3%">:</td>
-                          <td width="64%">Oct,12,2020 ({{$post->deadline}} days from now)</td>
+                          <td width="64%" class="text-danger">{{date('l, jS \of F Y',$post->deadlineTimestamp())}}, ({{ date('d',$post->remainingDays())}} days from now)</td>
                         </tr>
                       </tbody>
                     </table>
@@ -97,11 +97,9 @@
                           <td width="33%">Professional Skill Required</td>
                           <td width="3%">:</td>
                           <td width="64%">
-                            <span class="badge badge-primary">Analytical</span>
-                            <span class="badge badge-primary">Multitasking</span>
-                            <span class="badge badge-primary">Comunitcation</span>
-                            <span class="badge badge-primary">Interpretational</span>
-                            {{$post->skills}}
+                            @foreach($post->getSkills() as $skill)
+                            <span class="badge badge-primary">{{$skill}}</span>
+                            @endforeach
                           </td>
                         </tr>
                       </tbody>

@@ -13,7 +13,7 @@
                       </div>
                       <h6 class="lead font-weight-bold">{{$company->title}}</h6>
                       <p >{{$company->getCategory->category_name}}</p>
-                      <div class="py-3 text-left">
+                      <div class="py-2">
                         <p class="small">{{$company->description}}</p>
                       </div>
                       <div class="text-center">
@@ -50,7 +50,7 @@
     bottom:-40px;
     left:50%;
     background-color:white; 
-    width:120px;
+    width:100px;
     transform: translateX(-50%);    
   }
 </style>

@@ -106,29 +106,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($company->posts as $index=>$post)
-                        <tr>
-                            <td>{{$index+1}}</td>
-                            <td> <a href="" title="Go to this post">{{$post->job_title}}</a></td>
-                            <td>{{$post->job_level}}</td>
-                            <td>{{$post->vacancy_count}}</td>
-                            <td>@php 
-                                $date = new DateTime($post->deadline);
-                                $timestamp =  $date->getTimestamp();
-                                $dayMonthYear = date('d/m/Y',$timestamp);
-                                $daysLeft = date('d', $timestamp - time()) .' days remaining';
-                                echo "$dayMonthYear <br> <span class='text-danger'> $daysLeft </span>";
-                            @endphp</td>
-                            <td>
-                            <a href="{{route('post.edit',['post'=>$post])}}" class="btn primary-btn">Edit</a>
-                            <form action="{{route('post.destroy',['post'=>$post->id])}}" class="d-inline-block" id="delPostForm" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" id="delPostBtn" class="btn danger-btn">Delete</button>
-                            </form>
-                            </td> 
-                        </tr>
-                        @endforeach
+                        @if($company)
+                            @foreach($company->posts as $index=>$post)
+                            <tr>
+                                <td>{{$index+1}}</td>
+                                <td> <a href="{{route('post.show',['job'=>$post])}}" target="_blank" title="Go to this post">{{$post->job_title}}</a></td>
+                                <td>{{$post->job_level}}</td>
+                                <td>{{$post->vacancy_count}}</td>
+                                <td>@php 
+                                    $date = new DateTime($post->deadline);
+                                    $timestamp =  $date->getTimestamp();
+                                    $dayMonthYear = date('d/m/Y',$timestamp);
+                                    $daysLeft = date('d', $timestamp - time()) .' days remaining';
+                                    echo "$dayMonthYear <br> <span class='text-danger'> $daysLeft </span>";
+                                @endphp</td>
+                                <td>
+                                <a href="{{route('post.edit',['post'=>$post])}}" class="btn primary-btn">Edit</a>
+                                <form action="{{route('post.destroy',['post'=>$post->id])}}" class="d-inline-block" id="delPostForm" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" id="delPostBtn" class="btn danger-btn">Delete</button>
+                                </form>
+                                </td> 
+                            </tr>
+                            @endforeach
+                            @else
+                            <tr>
+                                <td>You havent created a company yet.</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

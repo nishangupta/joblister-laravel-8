@@ -24,6 +24,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        if (!auth()->user()->company) {
+            return redirect()->route('company.create');
+        }
         return view('post.create');
     }
 
@@ -54,7 +57,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id)->with('company')->first();
+        $post = Post::findOrFail($id)->with('company', 'company.getCategory')->firstOrFail();
         return view('post.show')->with([
             'post' => $post
         ]);

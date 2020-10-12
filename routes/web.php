@@ -8,10 +8,20 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PostController;
 use App\Models\CompanyCategory;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
+
+Route::get('/carbon', function () {
+  $par = Carbon::parse('2020-10-11 17:16:13');
+
+  // $answer = Carbon::now()->toDateString();
+  $answer = $par->timestamp;
+  dd($answer);
+});
 
 //public routes
 Route::get('/', [PostController::class, 'index'])->name('post.index');
@@ -78,7 +88,7 @@ Route::get('/make-role', function () {
 });
 
 Route::get('/make-permiss', function () {
-  // $roles = ['view-dashboard', 'create-post', 'edit-post', 'delete-post', 'manage-authors', 'author-section', 'create-category', 'edit-category', 'delete-category','create-company', 'edit-company', 'delete-company'];
+  $roles = ['view-dashboard', 'create-post', 'edit-post', 'delete-post', 'manage-authors', 'author-section', 'create-category', 'edit-category', 'delete-category', 'create-company', 'edit-company', 'delete-company'];
   foreach ($roles as $role) {
     Permission::create(['name' => $role]);
   }
