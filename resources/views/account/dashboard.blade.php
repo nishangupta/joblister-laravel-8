@@ -14,7 +14,7 @@
                           <i class="fas fa-users fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Users</h6>
-                      <h1 class="">134</h1>
+                      <h1 class="">{{$dashCount['user']}}</h1>
                   </div>
               </div>
           </div>
@@ -25,7 +25,7 @@
                           <i class="fas fa-building fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Jobs</h6>
-                      <h1 class="">87</h1>
+                      <h1 class="">{{$dashCount['post']}}</h1>
                   </div>
               </div>
           </div>
@@ -36,7 +36,7 @@
                           <i class="fas fa-user-tie fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Authors</h6>
-                      <h1 class="">125</h1>
+                      <h1 class="">{{$dashCount['author']}}</h1>
                   </div>
               </div>
           </div>
@@ -53,7 +53,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Posts</th>
+                            <th>Company name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -65,7 +65,7 @@
                             <td>{{$author->email}}</td>
                             <td>{{$author->company->title}}</td>
                             <td>
-                            <a href="" class="btn primary-btn">View Profile</a>
+                            <a href="{{route('account.employer',['employer'=>$author->company])}}" class="btn primary-btn">View Company</a>
                             </td> 
                         </tr>
                         @endforeach
@@ -134,7 +134,7 @@
                                         <td>{{$category->id}}</td>
                                         <td>{{$category->category_name}}</td>
                                         <td><a class="btn secondary-btn" href="{{route('category.edit',['category'=>$category])}}">Edit</a> 
-                                            <form action="{{route('category.destroy',['category'=>$category->id])}}" id="categoryDestroyForm" class="d-inline">
+                                            <form action="{{route('category.destroy',['id'=>$category->id])}}" id="categoryDestroyForm" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button id="categoryDestroyBtn" class="btn danger-btn">Delete</button>

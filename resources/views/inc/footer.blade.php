@@ -7,8 +7,10 @@
             <h5 class="lead footer-hdr">For Job Seekers</h5>
             <div class="line-divider"></div>
             <div class="footer-link-list">
-             <a href="#" class="footer-links">Register <span class="badge badge-primary">Free</span></a>
-             <a href="#" class="footer-links">Find jobs</a>
+             <a href="{{route('register')}}" class="footer-links">Register <span class="badge badge-primary">Free</span></a>
+             <a href="{{route('login')}}" class="footer-links">Login</a>
+             <a href="" class="footer-links">Find jobs</a>
+             <a href="#" class="footer-links">Faq</a>
             </div>
           </div>
         </div>
@@ -17,8 +19,10 @@
             <h5 class="lead footer-hdr">For Employers</h5>
             <div class="line-divider"></div>
             <div class="footer-link-list">
-             <a href="#" class="footer-links">Register <span class="badge badge-primary">Free</span></a>
-             <a href="#" class="footer-links">Vacancy Announcement</a>
+             <a href="{{route('register')}}" class="footer-links">Register <span class="badge badge-primary">Free</span></a>
+             <a href="{{route('login')}}" class="footer-links">Login</a>
+             <a href="{{route('post.create')}}" class="footer-links">Vacancy Announcement</a>
+             <a href="#" class="footer-links">Faq</a>
             </div>
           </div>
         </div>
@@ -84,6 +88,7 @@
   }
   .footer-main .social-links .social-link{
     background-color:white; 
+    color:#333;
     padding:8px 10px;
     border-radius: 50%;
     transition:all .3s ease;

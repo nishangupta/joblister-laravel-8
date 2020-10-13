@@ -27,6 +27,13 @@
         <i class="fas fa-user-shield"></i> User Account
       </a>
     </li>
+    @role('user')
+    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'become-employer' ? 'active': ''}}">
+      <a href="{{route('account.becomeEmployer')}}" class="account-nav-link">
+        <i class="fas fa-user-shield"></i> Become an employer
+      </a>
+    </li>
+    @endrole
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'change-password' ? 'active': ''}}">
       <a href="{{route('account.changePassword')}}" class="account-nav-link">
         <i class="fas fa-fingerprint"></i> Change Password

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\CompanyCategory;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,8 @@ class CompanyCategoryController extends Controller
         $request->validate([
             'category_name' => 'required|min:5'
         ]);
-        CompanyCategory::create([
+        $category = CompanyCategory::find($id);
+        $category->update([
             'category_name' => $request->category_name
         ]);
         return redirect()->route('account.dashboard');

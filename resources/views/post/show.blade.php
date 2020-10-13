@@ -9,12 +9,16 @@
             <div class="company-info">
               <div class="company-banner">
                 <div class="banner-overlay"></div>
-                  <img src="{{asset('images/companies/banner.jpg')}}" class="company-banner-img img-fluid" alt="">
+                @if($company->cover_img == 'noCover')
+                  <img src="{{asset($company->cover_img)}}" class="company-banner-img img-fluid" alt="">
+                @else
+                  <img src="{{asset('images/companies/nocover.jpg')}}" class="company-banner-img img-fluid" alt="">
+                @endif
                   <div class="company-media">
                     <img src="{{asset($company->logo)}}" alt="" class="company-logo">
                     <div>
-                      <a href="{{route('account.employer',['employer'=>$company])}}" class="company-link">
-                        <p class="company-name">{{$company->title}}</p>
+                      <a href="{{route('account.employer',['employer'=>$company])}}" class="secondary-link">
+                        <p class="h5 font-weight-bold">{{$company->title}}</p>
                       <p class="company-category">{{$company->getCategory->category_name}}</p>
                       </a>
                     </div>
@@ -59,7 +63,7 @@
                         <tr>
                           <td width="33%">No of vacancy[s]</td>
                           <td width="3%">:</td>
-                          <td width="64%">{{$post->vacancy_count}}</td>
+                          <td width="64%">[ <strong>{{$post->vacancy_count}}</strong> ]</td>
                         </tr>
                         <tr>
                           <td width="33%">Employment type</td>
@@ -162,17 +166,19 @@
 @push('css')
 <style>
  .company-banner{
-   min-height:15vh;
+   min-height:20vh;
    position: relative;
  }
  .company-banner-img{
-  height:100%;
+  width:100;
+  height:auto;
+  overflow:hidden;
  }
 .banner-overlay{
   position: absolute;
   bottom: 0;
   left:0;
-  background: linear-gradient(to bottom,transparent,rgba(0,0,0,.8));
+  background: linear-gradient(to bottom,transparent,rgba(0,0,0,.3));
   width:100%;
   height:200px;
 }

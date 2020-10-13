@@ -13,13 +13,12 @@ class AuthorController extends Controller
     {
         if ($this->hasCompany()) {
             $company = auth()->user()->company->first()->with('posts')->first();
-            return view('account.author-section')->with([
-                'company' => $company,
-            ]);
+        } else {
+            $company = null;
         }
         //doesnt have company
         return view('account.author-section')->with([
-            'company' => null
+            'company' => $company
         ]);
     }
 

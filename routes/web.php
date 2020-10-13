@@ -32,18 +32,18 @@ Route::middleware('auth')->prefix('account')->group(function () {
   Route::get('my-saved-jobs/{id}', [savedJobController::class, 'store'])->name('savedJob.store');
   Route::delete('my-saved-jobs/{id}', [savedJobController::class, 'destroy'])->name('savedJob.destroy');
 
-  //Admin Routes
+  //Admin Role Routes
   Route::group(['middleware' => ['role:admin']], function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('account.dashboard');
     Route::get('manage-authors', [AdminController::class, 'manageAuthors'])->name('account.manageAuthors');
 
     Route::get('category/{category}/edit', [CompanyCategoryController::class, 'edit'])->name('category.edit');
     Route::post('category', [CompanyCategoryController::class, 'store'])->name('category.store');
-    Route::put('category/{category}', [CompanyCategoryController::class, 'update'])->name('category.update');
-    Route::delete('category/{category}', [CompanyCategoryController::class, 'destroy'])->name('category.destroy');
+    Route::put('category/{id}', [CompanyCategoryController::class, 'update'])->name('category.update');
+    Route::delete('category/{id}', [CompanyCategoryController::class, 'destroy'])->name('category.destroy');
   });
 
-  //Author Routes
+  //Author Role Routes
   Route::group(['middleware' => ['role:author']], function () {
     Route::get('author-section', [AuthorController::class, 'authorSection'])->name('account.authorSection');
 
@@ -58,6 +58,12 @@ Route::middleware('auth')->prefix('account')->group(function () {
     Route::get('company/edit', [CompanyController::class, 'edit'])->name('company.edit');
     Route::put('company/{id}', [CompanyCategoryController::class, 'update'])->name('company.update');
     Route::delete('company', [CompanyController::class, 'destroy'])->name('company.destroy');
+  });
+
+  //User Role routes
+  Route::group(['middleware' => ['role:user']], function () {
+    Route::get('become-employer', [AccountController::class, 'becomeEmployerView'])->name('account.becomeEmployer');
+    Route::post('become-employer', [AccountController::class, 'becomeEmployer'])->name('account.becomeEmployer');
   });
 });
 

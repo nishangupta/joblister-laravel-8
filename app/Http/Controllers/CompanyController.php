@@ -91,7 +91,7 @@ class CompanyController extends Controller
         //cover image 
         if ($request->hasFile('cover_img')) {
             $fileNameToStore = $this->getFileName($request->file('cover_img'));
-            $logoPath = $request->file('logo')->storeAs('public/companies/logos', $fileNameToStore);
+            $coverPath = $request->file('cover_img')->storeAs('public/companies/cover', $fileNameToStore);
             if ($company->cover_img) {
                 Storage::delete('public/companies/cover/' . basename($company->cover_img));
             }

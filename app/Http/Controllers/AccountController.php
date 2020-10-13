@@ -18,10 +18,20 @@ class AccountController extends Controller
     {
         return view('account.user-account');
     }
-    public function savedList()
+
+    public function becomeEmployerView()
     {
-        return view('account.save-list');
+        return view('account.become-employer');
     }
+
+    public function becomeEmployer()
+    {
+        $user = User::find(auth()->user()->id);
+        $user->removeRole('user');
+        $user->assignRole('author');
+        return redirect()->route('account.authorSection');
+    }
+
     public function changePasswordView()
     {
         return view('account.change-password');
