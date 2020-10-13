@@ -37,10 +37,10 @@
                 <img src="{{asset($company->logo)}}" class="img-fluid" alt="">
               </div>
               <div class="col-9">
-                <p class="h4 text-info text-capitalize"> 
-                 {{$post->job_title}}
+                <p class="h4 text-info text-capitalize">
+                  {{$post->job_title}}
                 </p>
-                <h6 class="text-uppercase"> 
+                <h6 class="text-uppercase">
                   <a href="{{route('account.employer',['employer'=>$company])}}">{{$company->title}}</a>
                 </h6>
                 <p class="my-2"><i class="fas fa-map-marker-alt"></i> Location: {{$post->job_location}}</p>
@@ -58,6 +58,7 @@
                 <a href="{{URL::previous()}}" class="btn primary-outline-btn">Cancel</a>
                 <form action="{{route('account.applyJob')}}" method="POST" class="d-inline-block">
                   @csrf
+                  <input type="hidden" name="post_id" value="{{$post->id}}">
                   <button type="submit" class="btn primary-btn">Send Application <i class="fas fa-chevron-right"></i></a>
                 </form>
               </div>

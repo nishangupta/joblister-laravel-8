@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobApplication;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,7 +43,19 @@ class AccountController extends Controller
 
     public function applyJob(Request $request)
     {
-        dd($request->all());
+        $application = new JobApplication;
+        $user = User::find(auth()->user()->id);
+
+        $hasApplied = $user->applied()->where('post_id', $request->post_id)->get();
+        if ($hasApplied) {
+        } else {
+            return redirect()->route('post.show', ['job' => $request->post_id]);
+        }
+
+        $application->user_id = auth()->user()->id;
+        $application->post_id = $request->post_id;
+        $application->save();
+        return redirect()->route('post.show', ['job' => $request->post_id]);
     }
 
     public function changePasswordView()

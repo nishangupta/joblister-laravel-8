@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Post');
     }
+
+    public function applied()
+    {
+        return $this->hasMany('App\Models\JobApplication');
+    }
 }

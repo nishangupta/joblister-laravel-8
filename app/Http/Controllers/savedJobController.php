@@ -21,13 +21,13 @@ class savedJobController extends Controller
             return redirect()->back();
         } else {
             $user->posts()->attach($id);
-            return $this->index();
+            return redirect()->route('savedJob.index');
         }
     }
     public function destroy($id)
     {
         $user = User::find(auth()->user()->id);
         $user->posts()->detach($id);
-        return $this->index();
+        return redirect()->route('savedJob.index');
     }
 }
