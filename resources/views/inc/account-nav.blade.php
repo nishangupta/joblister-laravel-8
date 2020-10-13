@@ -21,9 +21,9 @@
       <a href="{{route('post.create')}}" class="account-nav-link">
         <i class="fas fa-plus-square"></i> Create Job listing
     </li>
-    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'post-notifications' ? 'active': ''}}">
-      <a href="{{route('post.create')}}" class="account-nav-link">
-        <i class="fas fa-bell"></i> Job Notifications
+    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'job-application' ? 'active': ''}}">
+      <a href="{{route('jobApplication.index')}}" class="account-nav-link">
+        <i class="fas fa-bell"></i> Job Applications
     </li>
     @endrole
     <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'overview' ? 'active': ''}}">

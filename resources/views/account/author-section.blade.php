@@ -14,7 +14,7 @@
                           <i class="fas fa-users fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">My Posts</h6>
-                      <h1 class="">134</h1>
+                      <h1 class="">{{$company? $company->posts->count() : 0}}</h1>
                   </div>
               </div>
           </div>
@@ -25,20 +25,22 @@
                           <i class="fas fa-th fa-4x"></i>
                       </div>
                       <h6 class="text-uppercase">Live Posts</h6>
-                      <h1 class="">87</h1>
+                      <h1 class="">{{$livePosts?? 0}}</h1>
                   </div>
               </div>
           </div>
           <div class="col-xl-4 col-sm-6 py-2">
-              <div class="card dashboard-card text-white h-100 shadow">
-                  <div class="card-body bg-danger">
-                      <div class="rotate">
-                          <i class="fas fa-envelope fa-4x"></i>
-                      </div>
-                      <h6 class="text-uppercase">Notifications</h6>
-                      <h1 class="">125</h1>
-                  </div>
-              </div>
+              <a href="{{route('jobApplication.index')}}">
+                <div class="card dashboard-card text-white h-100 shadow">
+                    <div class="card-body bg-danger">
+                        <div class="rotate">
+                            <i class="fas fa-envelope fa-4x"></i>
+                        </div>
+                        <h6 class="text-uppercase">Applications</h6>
+                        <h1 class="">{{$applications? $applications->count():0}}</h1>
+                    </div>
+                </div>
+              </a>
           </div>
       </div>
 

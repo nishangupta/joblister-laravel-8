@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\AuthorController;
 use App\Http\Controllers\CompanyCategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\savedJobController;
 use App\Models\CompanyCategory;
@@ -49,6 +50,10 @@ Route::middleware('auth')->prefix('account')->group(function () {
   //Author Role Routes
   Route::group(['middleware' => ['role:author']], function () {
     Route::get('author-section', [AuthorController::class, 'authorSection'])->name('account.authorSection');
+
+    Route::get('job-application/{id}', [JobApplicationController::class, 'show'])->name('jobApplication.show');
+    Route::delete('job-application', [JobApplicationController::class, 'destroy'])->name('jobApplication.destroy');
+    Route::get('job-application', [JobApplicationController::class, 'index'])->name('jobApplication.index');
 
     Route::get('post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('post', [PostController::class, 'store'])->name('post.store');
