@@ -35,4 +35,7 @@ class AuthorController extends Controller
     {
         return auth()->user()->company ? true : false;
     }
+
+    //job notifications
+    //when users apply on the job
 }

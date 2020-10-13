@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,18 @@ class AccountController extends Controller
         $user->removeRole('user');
         $user->assignRole('author');
         return redirect()->route('account.authorSection');
+    }
+
+    public function applyJobView(Request $request)
+    {
+        $post = Post::find($request->id);
+        $company = $post->company;
+        return view('account.apply-job', compact('post', 'company'));
+    }
+
+    public function applyJob(Request $request)
+    {
+        dd($request->all());
     }
 
     public function changePasswordView()
