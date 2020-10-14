@@ -36,7 +36,7 @@
                         <div class="rotate">
                             <i class="fas fa-envelope fa-4x"></i>
                         </div>
-                        <h6 class="text-uppercase">Applications</h6>
+                        <h6 class="text-uppercase">Total Applications</h6>
                         <h1 class="">{{$applications? $applications->count():0}}</h1>
                     </div>
                 </div>

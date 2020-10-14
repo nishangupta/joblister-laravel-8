@@ -6,9 +6,9 @@
         <i class="fas fa-chart-line"></i> Dashboard
       </a>
     </li>
-    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'manage-authors' ? 'active': ''}}">
-      <a href="{{route('account.manageAuthors')}}" class="account-nav-link">
-        <i class="fas fa-users"></i> Manage Authors
+    <li class="list-group-item list-group-item-action {{ request()->segment(2) == 'view-all-users' ? 'active': ''}}">
+      <a href="{{route('account.viewAllUsers')}}" class="account-nav-link">
+        <i class="fas fa-users"></i> View All Users
       </a>
     </li>
     @endrole

@@ -24,7 +24,7 @@
                       <div class="rotate">
                           <i class="fas fa-building fa-4x"></i>
                       </div>
-                      <h6 class="text-uppercase">Jobs</h6>
+                      <h6 class="text-uppercase">Total Jobs</h6>
                       <h1 class="">{{$dashCount['post']}}</h1>
                   </div>
               </div>
@@ -40,12 +40,34 @@
                   </div>
               </div>
           </div>
+          <div class="col-xl-6 col-sm-6 py-2">
+            <div class="card dashboard-card text-white h-100 shadow">
+                <div class="card-body bg-danger">
+                    <div class="rotate">
+                        <i class="fas fa-star-of-life fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">LivePosts</h6>
+                    <h1 class="">{{$dashCount['livePost']}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-sm-6 py-2">
+            <div class="card dashboard-card text-white h-100 shadow">
+                <div class="card-body bg-warning">
+                    <div class="rotate">
+                        <i class="fas fa-industry fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">Company Categories</h6>
+                    <h1 class="">{{$companyCategories->count()}}</h1>
+                </div>
+            </div>
+        </div>
       </div>
 
       <section class="dashboard-authors my-5">
         <div class="row my-4">
           <div class="col-lg-12 col-md-8 col-sm-12">
-            <h4 class="card-title text-secondary">Manage Authors (Job listers)</h4>
+            <h4 class="card-title text-secondary">Manage Authors (Job listers) </h4>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead class="thead-inverse">
@@ -58,7 +80,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach($recentAuthors as $author)
+                        @foreach($recentAuthors as $author)
                         <tr>
                             <td>{{$author->id}}</td>
                             <td>{{$author->name}}</td>
@@ -69,12 +91,14 @@
                             </td> 
                         </tr>
                         @endforeach
-                        <div class="d-flex">
-                            {{$recentAuthors->links()}}
-                        </div>
                     </tbody>
                 </table>
             </div>
+            <button class="btn primary-outline-btn disabled">Total Number of authors registered ({{ $recentAuthors->total()}}) </button>
+
+            <div class="d-flex justify-content-center mt-4 custom-pagination">
+                {{ $recentAuthors->links() }}
+              </div>
           </div>
         </div>
       <!--/row-->

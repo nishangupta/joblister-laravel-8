@@ -11988,6 +11988,16 @@ button {
   background-color: #185a91 !important;
 }
 
+.custom-pagination .page-item .page-link {
+  width: 2rem;
+  border-radius: 2px;
+}
+
+.custom-pagination .page-item.active .page-link {
+  background-color: #185a91 !important;
+  border: 1px solid #185a91 !important;
+}
+
 .home-page {
   padding: 2rem;
   background: linear-gradient(to bottom right, #0261a6, #022c5a);

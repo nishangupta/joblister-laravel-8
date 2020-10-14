@@ -39,7 +39,7 @@ Route::middleware('auth')->prefix('account')->group(function () {
   //Admin Role Routes
   Route::group(['middleware' => ['role:admin']], function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('account.dashboard');
-    Route::get('manage-authors', [AdminController::class, 'manageAuthors'])->name('account.manageAuthors');
+    Route::get('view-all-users', [AdminController::class, 'viewAllUsers'])->name('account.viewAllUsers');
 
     Route::get('category/{category}/edit', [CompanyCategoryController::class, 'edit'])->name('category.edit');
     Route::post('category', [CompanyCategoryController::class, 'store'])->name('category.store');

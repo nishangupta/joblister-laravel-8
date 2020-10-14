@@ -36,6 +36,12 @@ class AccountController extends Controller
 
     public function applyJobView(Request $request)
     {
+        $user = User::find(auth()->user()->id);
+
+        if ($this->hasApplied($user, $request->post_id)) {
+            return redirect()->route('post.show', ['job' => $request->post_id]);
+        }
+
         $post = Post::find($request->id);
         $company = $post->company;
         return view('account.apply-job', compact('post', 'company'));
@@ -46,9 +52,7 @@ class AccountController extends Controller
         $application = new JobApplication;
         $user = User::find(auth()->user()->id);
 
-        $hasApplied = $user->applied()->where('post_id', $request->post_id)->get();
-        if ($hasApplied) {
-        } else {
+        if ($this->hasApplied($user, $request->post_id)) {
             return redirect()->route('post.show', ['job' => $request->post_id]);
         }
 
@@ -118,5 +122,15 @@ class AccountController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    protected function hasApplied($user, $postId)
+    {
+        $applied = $user->applied()->where('post_id', $postId)->get();
+        if ($applied) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -118,7 +118,7 @@
               <hr>
               <div class="d-flex justify-content-between">
                 <div>
-                  <a href="{{route('account.applyJob',['id'=>$post])}}" class="btn primary-btn">Apply now</a>
+                  <a href="{{route('account.applyJob',['post_id'=>$post])}}" class="btn primary-btn">Apply now</a>
                   <a href="{{route('savedJob.store',['id'=>$post])}}" class="btn primary-outline-btn"><i class="fas fa-star"></i> Save job</a>
                 </div>
                 <div class="social-links">
@@ -138,8 +138,8 @@
             Job Action
           </div>
           <div class="card-body d-flex justify-content-between">
-            <a href="{{route('savedJob.store',['id'=>$post])}}" class="btn primary-outline-btn"><i class="fas fa-star"></i> Save job</a>
-            <a href="{{route('account.applyJob',['id'=>$post])}}" class="btn primary-btn">Apply Now</a>
+            <a href="{{route('savedJob.store',['id'=>$post->id])}}" class="btn primary-outline-btn"><i class="fas fa-star"></i> Save job</a>
+            <a href="{{route('account.applyJob',['post_id'=>$post->id])}}" class="btn primary-btn">Apply Now</a>
           </div>
         </div>
         <div class="card ">

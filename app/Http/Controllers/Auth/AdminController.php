@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CompanyCategory;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -14,7 +15,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $authors = User::role('author')->with('company')->paginate(5);
+        $authors = User::role('author')->with('company')->paginate(30);
         $roles = Role::all()->pluck('name');
         $permissions = Permission::all()->pluck('name');
         $rolesHavePermissions = Role::with('permissions')->get();
@@ -23,6 +24,7 @@ class AdminController extends Controller
         $dashCount['author'] = User::role('author')->count();
         $dashCount['user'] = User::role('user')->count();
         $dashCount['post'] = Post::count();
+        $dashCount['livePost'] = Post::where('deadline', '>', Carbon::now())->count();
 
         return view('account.dashboard')->with([
             'companyCategories' => CompanyCategory::all(),
@@ -33,8 +35,11 @@ class AdminController extends Controller
             'rolesHavePermissions' => $rolesHavePermissions,
         ]);
     }
-    public function manageAuthors()
+    public function viewAllUsers()
     {
-        return view('account.manage-authors');
+        $users = User::select('id', 'name', 'email', 'created_at')->latest()->paginate(30);
+        return view('account.view-all-users')->with([
+            'users' => $users
+        ]);
     }
 }
