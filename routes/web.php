@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthorController;
 use App\Http\Controllers\CompanyCategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\savedJobController;
 use App\Models\CompanyCategory;
@@ -18,6 +19,9 @@ use Spatie\Permission\Models\Permission;
 Route::get('/', [PostController::class, 'index'])->name('post.index');
 Route::get('/job/{job}', [PostController::class, 'show'])->name('post.show');
 Route::get('employer/{employer}', [AuthorController::class, 'employer'])->name('account.employer');
+
+//job 
+Route::get('search', [JobController::class, 'index'])->name('job.index');
 
 //auth routes
 Route::middleware('auth')->prefix('account')->group(function () {
