@@ -10,12 +10,15 @@ class JobApplicationController extends Controller
 {
     public function index()
     {
+        $applicationsWithPostAndUser = null;
         $company = auth()->user()->company;
 
-        $ids = $company->posts()->pluck('id');
-        $applications = JobApplication::whereIn('post_id', $ids);
+        if ($company) {
+            $ids =  $company->posts()->pluck('id');
+            $applications = JobApplication::whereIn('post_id', $ids);
+            $applicationsWithPostAndUser = $applications->with('user', 'post')->latest()->paginate(10);
+        }
 
-        $applicationsWithPostAndUser = $applications->with('user', 'post')->latest()->paginate(10);
         return view('job-application.index')->with([
             'applications' => $applicationsWithPostAndUser,
         ]);

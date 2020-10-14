@@ -45,7 +45,9 @@ class AuthorController extends Controller
             'company' => $company,
         ]);
     }
-    public function hasCompany()
+
+    //check if has company
+    protected function hasCompany()
     {
         return auth()->user()->company ? true : false;
     }

@@ -36,14 +36,12 @@ class AccountController extends Controller
 
     public function applyJobView(Request $request)
     {
-        $user = User::find(auth()->user()->id);
-
-        if ($this->hasApplied($user, $request->post_id)) {
+        if ($this->hasApplied(auth()->user(), $request->post_id)) {
             return redirect()->route('post.show', ['job' => $request->post_id]);
         }
 
-        $post = Post::find($request->id);
-        $company = $post->company;
+        $post = Post::find($request->post_id);
+        $company = $post->company()->first();
         return view('account.apply-job', compact('post', 'company'));
     }
 
@@ -127,7 +125,7 @@ class AccountController extends Controller
     protected function hasApplied($user, $postId)
     {
         $applied = $user->applied()->where('post_id', $postId)->get();
-        if ($applied) {
+        if ($applied->count()) {
             return true;
         } else {
             return false;
