@@ -29,9 +29,18 @@
                   name="job_category"
                   class="form-control"
                   placeholder="Filter by Job Category"
-                  tabindex="-1"
+                  @change="filterCategory($event)"
                 >
-                  <option value="it and comm">It and comm</option>
+                  <option disabled selected value>
+                    -- select an option --
+                  </option>
+                  <option
+                    v-for="category in categories"
+                    :value="category.id"
+                    :key="category.id"
+                  >
+                    {{ category.category_name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -45,9 +54,15 @@
                   name="job_category"
                   class="form-control"
                   placeholder="Filter by Job Category"
-                  tabindex="-1"
+                  @change="filterJobLevel($event)"
                 >
-                  <option value="it and comm">Top</option>
+                  <option disabled selected value>
+                    -- select an option --
+                  </option>
+                  <option value="Senior level">Senior level</option>
+                  <option value="Mid level">Mid level</option>
+                  <option value="Top level">Top level</option>
+                  <option value="Entry level">Entry level</option>
                 </select>
               </div>
             </div>
@@ -61,9 +76,16 @@
                   name="job_category"
                   class="form-control"
                   placeholder="Filter by Job Category"
-                  tabindex="-1"
+                  @change="filterEducation($event)"
                 >
-                  <option value="it and comm">Top</option>
+                  <option disabled selected value>
+                    -- select an option --
+                  </option>
+                  <option value="Bachelors">Bachelors</option>
+                  <option value="High School">High School</option>
+                  <option value="Master">Master</option>
+                  <option value="SEE Mid School">SEE Mid School</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
             </div>
@@ -77,9 +99,17 @@
                   name="job_category"
                   class="form-control"
                   placeholder="Filter by Job Category"
-                  tabindex="-1"
+                  @change="filterEmploymentType($event)"
                 >
-                  <option value="it and comm">Top</option>
+                  <option disabled selected value>
+                    -- select an option --
+                  </option>
+                  <option value="Full Time">Full Time</option>
+                  <option value="Part Time">Part Time</option>
+                  <option value="Freelance">Freelance</option>
+                  <option value="Internship">Internship</option>
+                  <option value="Trainneship">Trainneship</option>
+                  <option value="Volunter">Volunter</option>
                 </select>
               </div>
             </div>
@@ -91,7 +121,40 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  name: "sidebar-component",
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  mounted() {
+    this.setCategoies();
+  },
+  methods: {
+    setCategoies() {
+      axios
+        .get("/company-categories")
+        .then((res) => res.data)
+        .then((data) => {
+          this.categories = JSON.parse(JSON.stringify(data));
+        });
+    },
+    filterCategory(e) {
+      this.$emit("filterCategory", e.target.value);
+    },
+    filterEmploymentType(e) {
+      this.$emit("filterEmploymentType", e.target.value);
+    },
+    filterEducation(e) {
+      this.$emit("filterEducation", e.target.value);
+    },
+    filterJobLevel(e) {
+      this.$emit("filterJobLevel", e.target.value);
+    },
+  },
+};
 </script>
 
 <style>

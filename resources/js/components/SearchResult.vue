@@ -27,7 +27,10 @@
               class="row job-card align-items-center text-center text-lg-left"
             >
               <div class="col-md-3 col-lg-3 pt-2">
-                <img class="border p-2 img-fluid" :src="post.company.logo" />
+                <img
+                  class="border p-2 img-fluid"
+                  :src="`/${post.company.logo}`"
+                />
               </div>
               <div class="col-md-9 col-lg-9 pl-0 pl-md-2 pb-2">
                 <h5 class="secondary-link font-weight-bold">

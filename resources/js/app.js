@@ -2,6 +2,8 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 
+require("./progressbar");
+
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 

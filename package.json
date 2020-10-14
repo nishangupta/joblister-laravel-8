@@ -24,6 +24,7 @@
         "jquery": "^1.12.4",
         "popper.js": "^1.16.1",
         "vue": "^2.6.12",
+        "vue-progressbar": "^0.7.5",
         "vue-router": "^3.4.6"
     }
 }

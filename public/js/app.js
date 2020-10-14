@@ -1918,6 +1918,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "app-component",
@@ -1952,6 +1953,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1972,48 +1978,75 @@ __webpack_require__.r(__webpack_exports__);
     getJobs: function getJobs() {
       var _this = this;
 
+      this.$Progress.start();
       axios.get("/search/api").then(function (res) {
         return res.data;
-      }).then(function (posts) {
-        _this.posts = posts;
+      }).then(function (data) {
+        _this.posts = data;
+
+        _this.$Progress.finish();
       })["catch"](function (err) {
-        return console.log(err.message);
+        console.log(err.message);
+
+        _this.$Progress.fail();
       });
     },
     getByCategory: function getByCategory(categoryId) {
+      var _this2 = this;
+
+      this.$Progress.start();
       axios.get("/search/api?category_id=".concat(categoryId)).then(function (res) {
         return res.data;
       }).then(function (data) {
-        return console.log(data);
+        _this2.posts = data;
+
+        _this2.$Progress.finish();
       })["catch"](function (err) {
-        return console.log(err.message);
+        console.log(err.message);
+
+        _this2.$Progress.fail();
       });
     },
     getByEducation: function getByEducation(educationLevel) {
+      var _this3 = this;
+
+      this.$Progress.start();
       axios.get("/search/api?category_id=".concat(educationLevel)).then(function (res) {
         return res.data;
       }).then(function (data) {
-        return console.log(data);
+        _this3.$Progress.finish();
       })["catch"](function (err) {
-        return console.log(err.message);
+        console.log(err.message);
+
+        _this3.$Progress.fail();
       });
     },
     getByjobLevel: function getByjobLevel(jobLevel) {
+      var _this4 = this;
+
+      this.$Progress.start();
       axios.get("/search/api?category_id=".concat(jobLevel)).then(function (res) {
         return res.data;
       }).then(function (data) {
-        return console.log(data);
+        _this4.$Progress.finish();
       })["catch"](function (err) {
-        return console.log(err.message);
+        console.log(err.message);
+
+        _this4.$Progress.fail();
       });
     },
     getByEmploymentType: function getByEmploymentType(employmentType) {
+      var _this5 = this;
+
+      this.$Progress.start();
       axios.get("/search/api?category_id=".concat(employmentType)).then(function (res) {
         return res.data;
       }).then(function (data) {
-        return console.log(data);
+        _this5.$Progress.finish();
       })["catch"](function (err) {
-        return console.log(err.message);
+        console.log(err.message);
+
+        _this5.$Progress.fail();
       });
     }
   }
@@ -2170,6 +2203,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "searchResult",
   props: ["posts"]
@@ -2186,6 +2222,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2278,7 +2316,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "sidebar-component",
+  data: function data() {
+    return {
+      categories: []
+    };
+  },
+  mounted: function mounted() {
+    this.setCategoies();
+  },
+  methods: {
+    setCategoies: function setCategoies() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/company-categories").then(function (res) {
+        return res.data;
+      }).then(function (data) {
+        _this.categories = JSON.parse(JSON.stringify(data));
+      });
+    },
+    filterCategory: function filterCategory(e) {
+      this.$emit("filterCategory", e.target.value);
+    },
+    filterEmploymentType: function filterEmploymentType(e) {
+      this.$emit("filterEmploymentType", e.target.value);
+    },
+    filterEducation: function filterEducation(e) {
+      this.$emit("filterEducation", e.target.value);
+    },
+    filterJobLevel: function filterJobLevel(e) {
+      this.$emit("filterJobLevel", e.target.value);
+    }
+  }
+});
 
 /***/ }),
 
@@ -38707,7 +38809,9 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("router-view")
+      _c("router-view"),
+      _vm._v(" "),
+      _c("vue-progress-bar")
     ],
     1
   )
@@ -38739,7 +38843,16 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-sm-12 col-md-5 col-xl-4" },
-        [_c("Sidebar")],
+        [
+          _c("Sidebar", {
+            on: {
+              filterCategory: _vm.getByCategory,
+              filterEmploymentType: _vm.getByEmploymentType,
+              filterEducation: _vm.getByEducation,
+              filterJobLevel: _vm.getByjobLevel
+            }
+          })
+        ],
         1
       ),
       _vm._v(" "),
@@ -38916,7 +39029,7 @@ var render = function() {
                       _c("div", { staticClass: "col-md-3 col-lg-3 pt-2" }, [
                         _c("img", {
                           staticClass: "border p-2 img-fluid",
-                          attrs: { src: post.company.logo }
+                          attrs: { src: "/" + post.company.logo }
                         })
                       ]),
                       _vm._v(" "),
@@ -39067,164 +39180,282 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "accordion" } }, [
+      _c("div", { staticClass: "card border-top-0" }, [
+        _c(
+          "div",
+          { staticClass: "card-body p-3", attrs: { id: "jobCategories" } },
+          [
+            _c("div", { staticClass: "pb-0" }, [
+              _c("div", { staticClass: "card-title mb-1" }, [
+                _vm._v("Job Categories")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body p-0" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "job_category",
+                        placeholder: "Filter by Job Category"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.filterCategory($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "", selected: "", value: "" } },
+                        [
+                          _vm._v(
+                            "\n                  -- select an option --\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.categories, function(category) {
+                        return _c(
+                          "option",
+                          {
+                            key: category.id,
+                            domProps: { value: category.id }
+                          },
+                          [
+                            _vm._v(
+                              "\n                  " +
+                                _vm._s(category.category_name) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr", { staticClass: "my-3" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "pb-0" }, [
+              _c("div", { staticClass: "card-title mb-1" }, [
+                _vm._v("Job Level")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body p-0" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "job_category",
+                        placeholder: "Filter by Job Category"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.filterJobLevel($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "", selected: "", value: "" } },
+                        [
+                          _vm._v(
+                            "\n                  -- select an option --\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Senior level" } }, [
+                        _vm._v("Senior level")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Mid level" } }, [
+                        _vm._v("Mid level")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Top level" } }, [
+                        _vm._v("Top level")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Entry level" } }, [
+                        _vm._v("Entry level")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr", { staticClass: "my-3" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "pb-0" }, [
+              _c("div", { staticClass: "card-title mb-1" }, [
+                _vm._v("Eductation")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body p-0" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "job_category",
+                        placeholder: "Filter by Job Category"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.filterEducation($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "", selected: "", value: "" } },
+                        [
+                          _vm._v(
+                            "\n                  -- select an option --\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Bachelors" } }, [
+                        _vm._v("Bachelors")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "High School" } }, [
+                        _vm._v("High School")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Master" } }, [
+                        _vm._v("Master")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "SEE Mid School" } }, [
+                        _vm._v("SEE Mid School")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Other" } }, [
+                        _vm._v("Other")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr", { staticClass: "my-3" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "pb-0" }, [
+              _c("div", { staticClass: "card-title mb-1" }, [
+                _vm._v("Employment Type")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body p-0" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "job_category",
+                        placeholder: "Filter by Job Category"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.filterEmploymentType($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "", selected: "", value: "" } },
+                        [
+                          _vm._v(
+                            "\n                  -- select an option --\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Full Time" } }, [
+                        _vm._v("Full Time")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Part Time" } }, [
+                        _vm._v("Part Time")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Freelance" } }, [
+                        _vm._v("Freelance")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Internship" } }, [
+                        _vm._v("Internship")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Trainneship" } }, [
+                        _vm._v("Trainneship")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Volunter" } }, [
+                        _vm._v("Volunter")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "card p-0 m-0" }, [
-        _c("div", { staticClass: "card-body p-3" }, [
-          _c("div", { staticClass: "d-flex align-items-center small mb-0" }, [
-            _c("i", { staticClass: "fas fa-search mr-1" }),
-            _vm._v(" "),
-            _c("strong", [_vm._v("Refine Your Job Search")])
-          ]),
+    return _c("div", { staticClass: "card p-0 m-0" }, [
+      _c("div", { staticClass: "card-body p-3" }, [
+        _c("div", { staticClass: "d-flex align-items-center small mb-0" }, [
+          _c("i", { staticClass: "fas fa-search mr-1" }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "job-filter d-md-none d-none",
-              attrs: {
-                href: "#",
-                "data-toggle": "collapse",
-                "data-target": "#accordion",
-                "aria-expanded": "true",
-                "aria-controls": "accordion"
-              }
-            },
-            [
-              _c("i", { staticClass: "icon icon-list" }),
-              _vm._v(" Filter\n      ")
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "accordion" } }, [
-        _c("div", { staticClass: "card border-top-0" }, [
-          _c(
-            "div",
-            { staticClass: "card-body p-3", attrs: { id: "jobCategories" } },
-            [
-              _c("div", { staticClass: "pb-0" }, [
-                _c("div", { staticClass: "card-title mb-1" }, [
-                  _vm._v("Job Categories")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body p-0" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "select",
-                      {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "job_category",
-                          placeholder: "Filter by Job Category",
-                          tabindex: "-1"
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "it and comm" } }, [
-                          _vm._v("It and comm")
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "my-3" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "pb-0" }, [
-                _c("div", { staticClass: "card-title mb-1" }, [
-                  _vm._v("Job Level")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body p-0" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "select",
-                      {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "job_category",
-                          placeholder: "Filter by Job Category",
-                          tabindex: "-1"
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "it and comm" } }, [
-                          _vm._v("Top")
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "my-3" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "pb-0" }, [
-                _c("div", { staticClass: "card-title mb-1" }, [
-                  _vm._v("Eductation")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body p-0" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "select",
-                      {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "job_category",
-                          placeholder: "Filter by Job Category",
-                          tabindex: "-1"
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "it and comm" } }, [
-                          _vm._v("Top")
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "my-3" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "pb-0" }, [
-                _c("div", { staticClass: "card-title mb-1" }, [
-                  _vm._v("Employment Type")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body p-0" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "select",
-                      {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "job_category",
-                          placeholder: "Filter by Job Category",
-                          tabindex: "-1"
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "it and comm" } }, [
-                          _vm._v("Top")
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]
-          )
-        ])
+          _c("strong", [_vm._v("Refine Your Job Search")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "job-filter d-md-none d-none",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#accordion",
+              "aria-expanded": "true",
+              "aria-controls": "accordion"
+            }
+          },
+          [
+            _c("i", { staticClass: "icon icon-list" }),
+            _vm._v(" Filter\n      ")
+          ]
+        )
       ])
     ])
   }
@@ -39415,6 +39646,18 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-progressbar/dist/vue-progressbar.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vue-progressbar/dist/vue-progressbar.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,o){ true?module.exports=o():undefined}(this,function(){"use strict";!function(){if("undefined"!=typeof document){var t=document.head||document.getElementsByTagName("head")[0],o=document.createElement("style"),i=" .__cov-progress { opacity: 1; z-index: 999999; } ";o.type="text/css",o.styleSheet?o.styleSheet.cssText=i:o.appendChild(document.createTextNode(i)),t.appendChild(o)}}();var t="undefined"!=typeof window,r={render:function(){var t=this,o=t.$createElement;return(t._self._c||o)("div",{staticClass:"__cov-progress",style:t.style})},staticRenderFns:[],name:"VueProgress",serverCacheKey:function(){return"Progress"},computed:{style:function(){var t=this.progress,o=t.options,i=!!o.show,e=o.location,s={"background-color":o.canSuccess?o.color:o.failedColor,opacity:o.show?1:0,position:o.position};return"top"===e||"bottom"===e?("top"===e?s.top="0px":s.bottom="0px",o.inverse?s.right="0px":s.left="0px",s.width=t.percent+"%",s.height=o.thickness,s.transition=(i?"width "+o.transition.speed+", ":"")+"opacity "+o.transition.opacity):"left"!==e&&"right"!==e||("left"===e?s.left="0px":s.right="0px",o.inverse?s.top="0px":s.bottom="0px",s.height=t.percent+"%",s.width=o.thickness,s.transition=(i?"height "+o.transition.speed+", ":"")+"opacity "+o.transition.opacity),s},progress:function(){return t?window.VueProgressBarEventBus.RADON_LOADING_BAR:{percent:0,options:{canSuccess:!0,show:!1,color:"rgb(19, 91, 55)",failedColor:"red",thickness:"2px",transition:{speed:"0.2s",opacity:"0.6s",termination:300},location:"top",autoRevert:!0,inverse:!1}}}}};return{install:function(o){var t=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},i=(o.version.split(".")[0],"undefined"!=typeof window),e={$vm:null,state:{tFailColor:"",tColor:"",timer:null,cut:0},init:function(t){this.$vm=t},start:function(t){var o=this;this.$vm&&(t||(t=3e3),this.$vm.RADON_LOADING_BAR.percent=0,this.$vm.RADON_LOADING_BAR.options.show=!0,this.$vm.RADON_LOADING_BAR.options.canSuccess=!0,this.state.cut=1e4/Math.floor(t),clearInterval(this.state.timer),this.state.timer=setInterval(function(){o.increase(o.state.cut*Math.random()),95<o.$vm.RADON_LOADING_BAR.percent&&o.$vm.RADON_LOADING_BAR.options.autoFinish&&o.finish()},100))},set:function(t){this.$vm.RADON_LOADING_BAR.options.show=!0,this.$vm.RADON_LOADING_BAR.options.canSuccess=!0,this.$vm.RADON_LOADING_BAR.percent=Math.floor(t)},get:function(){return Math.floor(this.$vm.RADON_LOADING_BAR.percent)},increase:function(t){this.$vm.RADON_LOADING_BAR.percent=Math.min(99,this.$vm.RADON_LOADING_BAR.percent+Math.floor(t))},decrease:function(t){this.$vm.RADON_LOADING_BAR.percent=this.$vm.RADON_LOADING_BAR.percent-Math.floor(t)},hide:function(){var t=this;clearInterval(this.state.timer),this.state.timer=null,setTimeout(function(){t.$vm.RADON_LOADING_BAR.options.show=!1,o.nextTick(function(){setTimeout(function(){t.$vm.RADON_LOADING_BAR.percent=0},100),t.$vm.RADON_LOADING_BAR.options.autoRevert&&setTimeout(function(){t.revert()},300)})},this.$vm.RADON_LOADING_BAR.options.transition.termination)},pause:function(){clearInterval(this.state.timer)},finish:function(){this.$vm&&(this.$vm.RADON_LOADING_BAR.percent=100,this.hide())},fail:function(){this.$vm.RADON_LOADING_BAR.options.canSuccess=!1,this.$vm.RADON_LOADING_BAR.percent=100,this.hide()},setFailColor:function(t){this.$vm.RADON_LOADING_BAR.options.failedColor=t},setColor:function(t){this.$vm.RADON_LOADING_BAR.options.color=t},setLocation:function(t){this.$vm.RADON_LOADING_BAR.options.location=t},setTransition:function(t){this.$vm.RADON_LOADING_BAR.options.transition=t},tempFailColor:function(t){this.state.tFailColor=this.$vm.RADON_LOADING_BAR.options.failedColor,this.$vm.RADON_LOADING_BAR.options.failedColor=t},tempColor:function(t){this.state.tColor=this.$vm.RADON_LOADING_BAR.options.color,this.$vm.RADON_LOADING_BAR.options.color=t},tempLocation:function(t){this.state.tLocation=this.$vm.RADON_LOADING_BAR.options.location,this.$vm.RADON_LOADING_BAR.options.location=t},tempTransition:function(t){this.state.tTransition=this.$vm.RADON_LOADING_BAR.options.transition,this.$vm.RADON_LOADING_BAR.options.transition=t},revertColor:function(){this.$vm.RADON_LOADING_BAR.options.color=this.state.tColor,this.state.tColor=""},revertFailColor:function(){this.$vm.RADON_LOADING_BAR.options.failedColor=this.state.tFailColor,this.state.tFailColor=""},revertLocation:function(){this.$vm.RADON_LOADING_BAR.options.location=this.state.tLocation,this.state.tLocation=""},revertTransition:function(){this.$vm.RADON_LOADING_BAR.options.transition=this.state.tTransition,this.state.tTransition={}},revert:function(){this.$vm.RADON_LOADING_BAR.options.autoRevert&&(this.state.tColor&&this.revertColor(),this.state.tFailColor&&this.revertFailColor(),this.state.tLocation&&this.revertLocation(),!this.state.tTransition||void 0===this.state.tTransition.speed&&void 0===this.state.tTransition.opacity||this.revertTransition())},parseMeta:function(t){for(var o in t.func){var i=t.func[o];switch(i.call){case"color":switch(i.modifier){case"set":this.setColor(i.argument);break;case"temp":this.tempColor(i.argument)}break;case"fail":switch(i.modifier){case"set":this.setFailColor(i.argument);break;case"temp":this.tempFailColor(i.argument)}break;case"location":switch(i.modifier){case"set":this.setLocation(i.argument);break;case"temp":this.tempLocation(i.argument)}break;case"transition":switch(i.modifier){case"set":this.setTransition(i.argument);break;case"temp":this.tempTransition(i.argument)}}}}},s=function(t,o){for(var i,e,s=1;s<arguments.length;++s)for(i in e=arguments[s])Object.prototype.hasOwnProperty.call(e,i)&&(t[i]=e[i]);return t}({canSuccess:!0,show:!1,color:"#73ccec",position:"fixed",failedColor:"red",thickness:"2px",transition:{speed:"0.2s",opacity:"0.6s",termination:300},autoRevert:!0,location:"top",inverse:!1,autoFinish:!0},t),n=new o({data:{RADON_LOADING_BAR:{percent:0,options:s}}});i&&(window.VueProgressBarEventBus=n,e.init(n)),o.component("vue-progress-bar",r),o.prototype.$Progress=e}}});
 
 
 /***/ }),
@@ -54550,6 +54793,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
+__webpack_require__(/*! ./progressbar */ "./resources/js/progressbar.js");
+
+
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
@@ -55170,6 +55416,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Organization_vue_vue_type_template_id_6bd1c5bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/progressbar.js":
+/*!*************************************!*\
+  !*** ./resources/js/progressbar.js ***!
+  \*************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
+/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_0__);
+
+Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_0___default.a, {
+  color: "rgb(143, 255, 199)",
+  failedColor: "red",
+  height: "4px",
+  transition: {
+    speed: "0.4s",
+    opacity: "0.6s",
+    termination: 300
+  }
+});
 
 /***/ }),
 

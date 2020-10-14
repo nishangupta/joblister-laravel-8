@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyCategory;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -34,5 +35,10 @@ class JobController extends Controller
 
         $posts = $posts->with('company')->get();
         return $posts;
+    }
+    public function getCategories()
+    {
+        $categories = CompanyCategory::all();
+        return $categories->toJson();
     }
 }

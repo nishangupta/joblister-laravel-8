@@ -22,6 +22,7 @@ Route::get('employer/{employer}', [AuthorController::class, 'employer'])->name('
 
 //job routes
 Route::get('/search/api', [JobController::class, 'search'])->name('job.search');
+Route::get('/company-categories', [JobController::class, 'getCategories'])->name('job.getCategories');
 //return vue page
 Route::get('/search', [JobController::class, 'index'])->name('job.index');
 
