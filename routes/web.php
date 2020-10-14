@@ -20,8 +20,10 @@ Route::get('/', [PostController::class, 'index'])->name('post.index');
 Route::get('/job/{job}', [PostController::class, 'show'])->name('post.show');
 Route::get('employer/{employer}', [AuthorController::class, 'employer'])->name('account.employer');
 
-//job 
-Route::get('search', [JobController::class, 'index'])->name('job.index');
+//job routes
+Route::get('/search/api', [JobController::class, 'search'])->name('job.search');
+//return vue page
+Route::get('/search', [JobController::class, 'index'])->name('job.index');
 
 //auth routes
 Route::middleware('auth')->prefix('account')->group(function () {

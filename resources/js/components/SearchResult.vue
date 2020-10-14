@@ -1,55 +1,61 @@
 <template>
-  <div>
-    <div class="search-results">
-      <div class="card mt-md-0 mt-3">
-        <div class="card-body row p-3">
-          <div class="col-6">
-            <h1 class="h6" id="job-count">Showing 1 - 6 job of 199</h1>
-          </div>
-          <div class="col-6">
-            <ul class="nav nav-inline float-right">
-              <li class="nav-item mr-3">
-                <a href="#" class="text-secondary">
-                  <span class="icon-calendar"></span>
-                  Posted: <span id="date_val"> All time </span>
-                </a>
-              </li>
-            </ul>
-          </div>
+  <div class="search-result">
+    <div class="card mt-md-0 mt-3">
+      <div class="card-body row p-3">
+        <div class="col-6">
+          <h1 class="h6" id="job-count">
+            Showing 1 - 6 job of {{ posts.length }}
+          </h1>
+        </div>
+        <div class="col-6">
+          <ul class="nav nav-inline float-right">
+            <li class="nav-item mr-3">
+              <a href="#" class="text-secondary">
+                <span class="icon-calendar"></span>
+                Posted: <span id="date_val"> All time </span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="search-box">
-      <div class="card mt-3 hover-shadow">
+    <div class="posts">
+      <div class="card mt-3 hover-shadow" v-for="post in posts" :key="post.id">
         <div class="card-body">
           <div class="col-sm-12 col-md-12 col-12 col-lg-12">
-            <div class="row job-card text-center text-lg-left">
-              <div class="col-md-3 col-lg-3">
-                <img
-                  class="border p-1"
-                  src="/media/cache/d1/f8/d1f847ae71a3a1afc70398655a435010.jpg"
-                  alt="Samudayik Sarathi"
-                />
+            <div
+              class="row job-card align-items-center text-center text-lg-left"
+            >
+              <div class="col-md-3 col-lg-3 pt-2">
+                <img class="border p-2 img-fluid" :src="post.company.logo" />
               </div>
-              <div class="col-lg-9 col-md-9 pl-0 pt-2">
-                <h1 class="text-primary font-weight-bold h4">
-                  <a href="/community-mobilizer-4/"> Community Mobilizer </a>
-                </h1>
-                <h3 class="h6">
-                  <a href="/employer/samudayik-sarathi/" class="text-dark">
-                    Samudayik Sarathi
+              <div class="col-md-9 col-lg-9 pl-0 pl-md-2 pb-2">
+                <h5 class="secondary-link font-weight-bold">
+                  <a
+                    :href="`/job/${post.id}-${post.job_title}`"
+                    target="_blank"
+                  >
+                    {{ post.job_title }}
                   </a>
-                </h3>
-                <span>Address: </span>
-                <span>13 Palikas of Kavre District</span>
+                </h5>
+                <h6 class="mt-2">
+                  <a
+                    :href="`/employer/${post.company.id}-${post.company.title}`"
+                    target="_blank"
+                    class="text-dark"
+                  >
+                    {{ post.company.title }}
+                  </a>
+                </h6>
+                <div class="small my-1">
+                  <span>Address: </span>
+                  <span>{{ post.job_location }}</span>
+                </div>
 
-                <div class="media-body">
+                <div class="small">
                   <span class="text-muted">Key Skills:</span>
-                  <span itemprop="skills">
-                    <span class="badge badge-primary">Reporting</span>
-                    <span class="badge badge-primary">Teamwork</span>
-                    <span class="badge badge-primary">Communication</span>
-                    <span class="badge badge-primary">Project Management</span>
+                  <span class="text-info">
+                    {{ post.skills }}
                   </span>
                 </div>
               </div>
@@ -57,10 +63,16 @@
           </div>
         </div>
         <div class="card-footer py-2">
+          <div class="d-inline">
+            <span class="text-muted">
+              <i class="fas fa-clock"></i> Apply Before:
+              {{ post.deadline.slice(0, -9) }}</span
+            >
+          </div>
           <div class="d-inline float-right">
-            <span class="text-primary mr-2">
+            <span class="text-muted mr-2">
               <span class="fas fa-eye mr-1"></span>
-              Views: 13
+              Views: {{ post.views }}
             </span>
           </div>
         </div>
@@ -70,7 +82,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "searchResult",
+  props: ["posts"],
+};
 </script>
 
 <style>

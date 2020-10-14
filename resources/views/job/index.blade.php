@@ -1,6 +1,6 @@
 @extends('layouts.job')
 @section('content')
 <section class="job-section">
-  <job-component/>
+  <app-component />
 </section>  
 @endsection
