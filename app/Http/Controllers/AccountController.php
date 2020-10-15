@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountController extends Controller
 {
@@ -37,6 +38,7 @@ class AccountController extends Controller
     public function applyJobView(Request $request)
     {
         if ($this->hasApplied(auth()->user(), $request->post_id)) {
+            Alert::toast('You have already applied for this job!', 'success');
             return redirect()->route('post.show', ['job' => $request->post_id]);
         }
 
@@ -51,12 +53,14 @@ class AccountController extends Controller
         $user = User::find(auth()->user()->id);
 
         if ($this->hasApplied($user, $request->post_id)) {
+            Alert::toast('You have already applied for this job!', 'success');
             return redirect()->route('post.show', ['job' => $request->post_id]);
         }
 
         $application->user_id = auth()->user()->id;
         $application->post_id = $request->post_id;
         $application->save();
+        Alert::toast('Thank you for applying! Wait for the company to respond!', 'success');
         return redirect()->route('post.show', ['job' => $request->post_id]);
     }
 
@@ -67,38 +71,39 @@ class AccountController extends Controller
 
     public function changePassword(Request $request)
     {
-        dd('asdas');
-        if (auth()->user()) {
-            $authUser = auth()->user();
-            $currentP = $request->current_password;
-            $newP = $request->new_password;
-            $confirmP = $request->confirm_password;
+        if (!auth()->user()) {
+            Alert::toast('Not authenticated!', 'success');
+            return redirect()->back();
+        }
 
-            //check if the password is valid
-            if (!$request->validate([
-                'currentPassword' => 'required|min:8',
-                'newPassword' => 'required|min:8'
-            ])) {
-                return 'invalid-password';
-            }
-            if (Hash::check($currentP, $authUser->password)) {
-                if (Str::of($newP)->exactly($confirmP)) {
-                    $user = User::find($authUser->id);
-                    $user->password = Hash::make($newP);
-                    if ($user->save()) {
-                        return 'password changed';
-                    } else {
-                        return 'Something went wrong';
-                    }
+        //check if the password is valid
+        $request->validate([
+            'current_password' => 'required|min:8',
+            'new_password' => 'required|min:8'
+        ]);
+
+        $authUser = auth()->user();
+        $currentP = $request->current_password;
+        $newP = $request->new_password;
+        $confirmP = $request->confirm_password;
+
+        if (Hash::check($currentP, $authUser->password)) {
+            if (Str::of($newP)->exactly($confirmP)) {
+                $user = User::find($authUser->id);
+                $user->password = Hash::make($newP);
+                if ($user->save()) {
+                    Alert::toast('Password Changed!', 'success');
+                    return redirect()->route('account.index');
                 } else {
-                    return 'password do not match';
+                    Alert::toast('Something went wrong!', 'warning');
                 }
             } else {
-                return 'incorrect password';
+                Alert::toast('Passwords do not match!', 'info');
             }
         } else {
-            return 'Not authenticated';
+            Alert::toast('Incorrect Password!', 'info');
         }
+        return redirect()->back();
     }
 
     public function deactivateView()
@@ -111,6 +116,7 @@ class AccountController extends Controller
         $user = User::find(auth()->user()->id);
         Auth::logout($user->id);
         if ($user->delete()) {
+            Alert::toast('Your account was deleted successfully!', 'info');
             return redirect(route('post.index'));
         } else {
             return view('account.deactivate');

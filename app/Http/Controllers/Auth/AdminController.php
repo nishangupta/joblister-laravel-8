@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -47,6 +48,7 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         if ($user->delete()) {
+            Alert::toast('Deleted Successfully!', 'danger');
             return redirect()->route('account.viewAllUsers');
         } else {
             return redirect()->intented('account.viewAllUsers');

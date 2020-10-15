@@ -17,7 +17,7 @@
                 </span>
             @enderror
         </div>
-        <p class="mt-3 alert alert-primary">Password must be 8 characters with 1 special character</p>
+        <p class="mt-3  alert alert-primary">Password must be 8 characters with 1 special character</p>
         <div class="form-group">
           <input type="password" placeholder="New Password*" class="form-control @error('new_password') is-invalid @enderror" name="new_password" value="{{ old('new_password') }}" required>
             @error('new_password')

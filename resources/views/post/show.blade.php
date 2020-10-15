@@ -246,7 +246,7 @@
     margin-bottom: .5rem;
     padding:.5rem 0;
   }
-  .job-item:hover .job-item {
+  .job-item:hover {
     background-color:#eee;
   } 
 

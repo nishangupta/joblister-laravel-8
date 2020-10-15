@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\CompanyCategory;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
@@ -53,8 +54,10 @@ class PostController extends Controller
 
         $post = Post::create($postData);
         if ($post) {
+            Alert::toast('Post listed!', 'success');
             return redirect()->route('account.authorSection');
         }
+        Alert::toast('Post failed to list!', 'warning');
         return redirect()->back();
     }
 
@@ -103,6 +106,7 @@ class PostController extends Controller
 
         $newPost = $getPost->update($request->all());
         if ($newPost) {
+            Alert::toast('Post successfully updated!', 'success');
             return redirect()->route('account.authorSection');
         }
         return redirect()->route('post.index');
@@ -117,6 +121,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->delete()) {
+            Alert::toast('Post successfully deleted!', 'success');
             return redirect()->route('account.authorSection');
         }
         return redirect()->back();

@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\CompanyCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CompanyController extends Controller
 {
@@ -17,6 +18,7 @@ class CompanyController extends Controller
     public function create()
     {
         if (auth()->user()->company) {
+            Alert::toast('Create a company first!', 'info');
             return $this->edit();
         }
         $categories = CompanyCategory::all();
@@ -34,6 +36,7 @@ class CompanyController extends Controller
         $this->validateCompany($request);
         $company = new Company();
         if ($this->companySave($company, $request)) {
+            Alert::toast('Company created!', 'success');
             return redirect()->route('account.authorSection');
         }
         return redirect()->route('account.authorSection');
@@ -58,6 +61,7 @@ class CompanyController extends Controller
 
         $company = auth()->user()->company;
         if ($this->companySave($company, $request)) {
+            Alert::toast('Company created!', 'success');
             return redirect()->route('account.authorSection');
         }
         return redirect()->route('account.authorSection');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobApplication;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JobApplicationController extends Controller
 {
@@ -42,6 +43,7 @@ class JobApplicationController extends Controller
     {
         $application = JobApplication::find($request->application_id);
         $application->delete();
+        Alert::toast('Company deleleted', 'warning');
         return redirect()->route('jobApplication.index');
     }
 }

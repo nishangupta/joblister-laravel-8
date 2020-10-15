@@ -15,6 +15,7 @@
         "laravel/fortify": "^1.6",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
+        "realrashid/sweet-alert": "^3.1",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
