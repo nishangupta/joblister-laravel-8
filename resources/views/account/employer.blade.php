@@ -10,7 +10,7 @@
         <div class="card-body">
 
             @foreach ( $company->posts as $post)
-            <div class="row mb-4 shadow py-2">
+            <div class="row mb-4 hover-shadow py-2">
               <div class="d-none d-md-block col-md-3">
                 <div class="border p-2 d-flex align-items-center">
                   <img src="{{asset($company->logo)}}" class="img-fluid" alt="">

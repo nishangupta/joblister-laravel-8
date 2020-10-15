@@ -18,7 +18,7 @@
                 <img src="{{asset($company->logo)}}" alt="" class="company-logo">
                 <div>
                   <a href="{{route('account.employer',['employer'=>$company])}}" class="secondary-link">
-                    <p>{{$company->title}}</p>
+                    <p class="font-weight-bold">{{$company->title}}</p>
                     <p class="company-category">{{$company->getCategory->category_name}}</p>
                   </a>
                 </div>
@@ -136,9 +136,11 @@
           <div class="card-header">
             Job Action
           </div>
-          <div class="card-body d-flex justify-content-between">
-            <a href="{{route('savedJob.store',['id'=>$post->id])}}" class="btn primary-outline-btn"><i class="fas fa-star"></i> Save job</a>
-            <a href="{{route('account.applyJob',['post_id'=>$post->id])}}" class="btn primary-btn">Apply Now</a>
+          <div class="card-body">
+            <div class="btn-group w-100">
+              <a href="{{route('account.applyJob',['post_id'=>$post->id])}}" class="btn primary-outline-btn float-left">Apply Now</a>
+              <a href="{{route('savedJob.store',['id'=>$post->id])}}" class="btn primary-btn"><i class="fas fa-star"></i> Save job</a>
+            </div>
           </div>
         </div>
         <div class="card ">

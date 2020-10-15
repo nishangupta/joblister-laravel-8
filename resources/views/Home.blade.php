@@ -38,7 +38,7 @@
         <div class="col-sm-12 col-md-7 ml-auto">
           <div class="card">
             <div class="card-header">
-              <p class="card-title font-weight-bold">Top jobs</p>
+              <p class="card-title font-weight-bold"><i class="fas fa-briefcase"></i> Top jobs</p>
             </div>
             <div class="card-body">
               <div class="top-jobs" >
@@ -64,7 +64,8 @@
 
                  </div>
                </div>
-             </div>
+              </div>
+              <a class="btn secondary-btn" href="{{route('job.index')}}">Show all jobs</a>
             </div>
           </div>
        
@@ -72,7 +73,7 @@
 
           <div class="card mb-4">
             <div class="card-header">
-              <p class="font-weight-bold">Top Employers</p>
+              <p class="font-weight-bold"><i class="fas fa-building"></i> Top Employers</p>
             </div>
             <div class="card-body">
               <div class="top-employers">
@@ -89,15 +90,15 @@
 
             <div class="card mb-4 job-by-category">
               <div class="card-header">
-                <p class="font-weight-bold">Jobs By Category</p>
+                <p class="font-weight-bold"><i class="fab fa-typo3"></i> Jobs By Category</p>
               </div>
               <div class="card-body">
                 <div class="jobs-category mb-3 mt-0">
                   @foreach ($categories as $category)
-                  <div><a href="{{URL::to('search?category_id='.$category->id)}}" class="text-muted">{{$category->category_name}}</a> </div>
+                  <div class="hover-shadow p-1"><a href="{{URL::to('search?category_id='.$category->id)}}" class="text-muted">{{$category->category_name}}</a> </div>
                   @endforeach
+                  <a class="p-1 text-info" href="{{route('job.index')}}">More..</a>
                 </div>
-                <a href="{{route('job.index')}}" class="text-muted">More..</a>
               </div>
             </div>
           </div>

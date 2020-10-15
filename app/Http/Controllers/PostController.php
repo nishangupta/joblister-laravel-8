@@ -73,7 +73,8 @@ class PostController extends Controller
         $company = $post->company()->first();
         $similarPosts = Post::whereHas('company', function ($query) use ($company) {
             return $query->where('company_category_id', $company->company_category_id);
-        })->with('company')->take(4)->get();
+        })->with('company')->take(5)->get();
+
         return view('post.show')->with([
             'post' => $post,
             'company' => $company,
