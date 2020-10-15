@@ -3,20 +3,22 @@
 @section('content')
   <div class="account-layout border">
     <div class="account-hdr bg-primary text-white border">
-      Create Company
+      Edit Company
     </div>
     <div class="account-bdy p-3">
      <form action="{{route('company.update',['id'=>$company])}}" method="POST" enctype="multipart/form-data">
+      @if($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
+
         @csrf
         @method('put')
         <div class="form-group">
           <label for="">Choose a Company Category</label>
-          <select class="form-control" name="category" value="{{ old('category')??$company->category }}"  required>
-            <option value="1"> IT & Telecommunication</option>
-            <option value="2"> Marketing / Advertising</option>
-            <option value="3"> General Mgmt.</option>
-            <option value="4"> Marketing / Advertising</option>
-            <option value="5"> Marketing / Advertising</option>
+          <select class="form-control" name="category" value="{{ old('category')??$company->company_category_id }}"  required>
+            @foreach ($categories as $category)
+              <option value="{{$category->id}}">{{$category->category_name}}</option>
+            @endforeach
           </select>
         </div>
 
@@ -26,8 +28,8 @@
             <img src="{{asset($company->logo)}}" width="80px" alt="">
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" name="logo">
-            <label class="custom-file-label" for="validatedCustomFile">Choose logo...</label>
+            <input type="file" class="custom-file-input"  name="logo">
+            <label class="custom-file-label" >Choose logo...</label>
             @error('logo')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -63,10 +65,11 @@
 
         <div class="pb-3">
           <div class="py-3">
-            <p>Company banner/cover</p>
+            <p class="py-2">Company banner/cover</p>
+            <img src="{{asset($company->cover_img)}}" width="200px;" class="img-fluid" alt="">
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" name="cover_img" required>
+            <input type="file" class="custom-file-input" id="validatedCustomFile" name="cover_img">
             <label class="custom-file-label" for="validatedCustomFile">Choose cover img...</label>
             @error('cover_img')
               <span class="invalid-feedback" role="alert">

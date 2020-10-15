@@ -12,7 +12,7 @@
           <label for="">Choose a Company Category</label>
           <select class="form-control" name="category" value="{{ old('category') }}" required>
             @foreach($categories as $category)
-          <option value="{{$category_id}}">{{$category->category_name}}</option>
+          <option value="{{$category->id}}">{{$category->category_name}}</option>
             @endforeach
           </select>
         </div>
@@ -62,8 +62,8 @@
             <p>Company banner/cover</p>
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" name="cover_img" required>
-            <label class="custom-file-label" for="validatedCustomFile">Choose cover img...</label>
+            <input type="file" class="custom-file-input" name="cover_img" >
+            <label class="custom-file-label">Choose cover img...</label>
             @error('cover_img')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>

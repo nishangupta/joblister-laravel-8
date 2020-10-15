@@ -34,11 +34,13 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $this->validateCompany($request);
+
         $company = new Company();
         if ($this->companySave($company, $request)) {
             Alert::toast('Company created!', 'success');
             return redirect()->route('account.authorSection');
         }
+        Alert::toast('Failed!', 'error');
         return redirect()->route('account.authorSection');
     }
 
@@ -51,19 +53,21 @@ class CompanyController extends Controller
     public function edit()
     {
         $company = auth()->user()->company;
-        return view('company.edit', compact('company'));
+        $categories = CompanyCategory::all();
+        return view('company.edit', compact('company', 'categories'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $this->validateCompany($request);
+        $this->validateCompanyUpdate($request);
 
         $company = auth()->user()->company;
-        if ($this->companySave($company, $request)) {
+        if ($this->companyUpdate($company, $request)) {
             Alert::toast('Company created!', 'success');
             return redirect()->route('account.authorSection');
         }
+        Alert::toast('Failed!', 'error');
         return redirect()->route('account.authorSection');
     }
 
@@ -73,7 +77,18 @@ class CompanyController extends Controller
             'title' => 'required|min:5',
             'description' => 'required|min:5',
             'logo' => 'required|image|max:2999',
-            'category' => 'required|string',
+            'category' => 'required',
+            'website' => 'required|string',
+            'cover_img' => 'sometimes|image|max:3999'
+        ]);
+    }
+    protected function validateCompanyUpdate(Request $request)
+    {
+        return $request->validate([
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+            'logo' => 'someiimes|image|max:2999',
+            'category' => 'required',
             'website' => 'required|string',
             'cover_img' => 'sometimes|image|max:3999'
         ]);
@@ -112,6 +127,38 @@ class CompanyController extends Controller
         return false;
     }
 
+    protected function companyUpdate(Company $company, Request $request)
+    {
+        $company->user_id = auth()->user()->id;
+        $company->title = $request->title;
+        $company->description = $request->description;
+        $company->company_category_id = $request->category;
+        $company->website = $request->website;
+
+        //logo
+        if ($request->hasFile('logo')) {
+            $fileNameToStore = $this->getFileName($request->file('logo'));
+            $logoPath = $request->file('logo')->storeAs('public/companies/logos', $fileNameToStore);
+            if ($company->logo) {
+                Storage::delete('public/companies/logos/' . basename($company->logo));
+            }
+            $company->logo = 'storage/companies/logos/' . $fileNameToStore;
+        }
+
+        //cover image 
+        if ($request->hasFile('cover_img')) {
+            $fileNameToStore = $this->getFileName($request->file('cover_img'));
+            $coverPath = $request->file('cover_img')->storeAs('public/companies/cover', $fileNameToStore);
+            if ($company->cover_img) {
+                Storage::delete('public/companies/cover/' . basename($company->cover_img));
+            }
+            $company->cover_img = 'storage/companies/cover/' . $fileNameToStore;
+        }
+        if ($company->save()) {
+            return true;
+        }
+        return false;
+    }
     protected function getFileName($file)
     {
         $fileName = $file->getClientOriginalName();

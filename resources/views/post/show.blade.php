@@ -150,7 +150,7 @@
           <div class="card-body">
             <div class="similar-jobs">
               @foreach ($similarJobs as $job)
-                <div class="job-item row">
+                <div class="job-item border-bottom row">
                   <div class="col-4">
                     <img src="{{asset($job->company->logo)}}" class="company-logo" alt="">
                   </div>
