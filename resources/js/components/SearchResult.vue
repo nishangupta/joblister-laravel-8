@@ -4,7 +4,7 @@
       <div class="card-body row p-3">
         <div class="col-6">
           <h1 class="h6" id="job-count">
-            Showing 1 - 6 job of {{ posts.length }}
+            Showing {{ from }} - {{ to }} job of {{ total }}
           </h1>
         </div>
         <div class="col-6">
@@ -23,16 +23,17 @@
       <div class="card mt-3 hover-shadow" v-for="post in posts" :key="post.id">
         <div class="card-body">
           <div class="col-sm-12 col-md-12 col-12 col-lg-12">
-            <div
-              class="row job-card align-items-center text-center text-lg-left"
-            >
-              <div class="col-md-3 col-lg-3 pt-2">
+            <div class="row align-items-center text-center text-lg-left">
+              <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 pt-2 mx-auto">
                 <img
                   class="border p-2 img-fluid"
                   :src="`/${post.company.logo}`"
+                  width="100px"
                 />
               </div>
-              <div class="col-md-9 col-lg-9 pl-0 pl-md-2 pb-2">
+              <div
+                class="col-xs-12 col-sm-12 col-md-9 col-lg-9 pl-0 pl-md-2 pb-2"
+              >
                 <h5 class="secondary-link font-weight-bold">
                   <a
                     :href="`/job/${post.id}-${post.job_title}`"
@@ -50,6 +51,7 @@
                     {{ post.company.title }}
                   </a>
                 </h6>
+
                 <div class="small my-1">
                   <span>Address: </span>
                   <span>{{ post.job_location }}</span>
@@ -87,7 +89,7 @@
 <script>
 export default {
   name: "searchResult",
-  props: ["posts"],
+  props: ["posts", "from", "to", "total"],
 };
 </script>
 

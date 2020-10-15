@@ -3,10 +3,11 @@ import VueProgressBar from "vue-progressbar";
 Vue.use(VueProgressBar, {
     color: "rgb(143, 255, 199)",
     failedColor: "red",
-    height: "4px",
+    thickness: "3px",
+    location: "top",
     transition: {
-        speed: "0.4s",
-        opacity: "0.6s",
-        termination: 300
+        speed: ".8s",
+        opacity: "1s",
+        termination: 2000
     }
 });

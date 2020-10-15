@@ -34,7 +34,7 @@ class JobController extends Controller
             $posts = Post::take(30);
         }
 
-        $posts = $posts->with('company')->get();
+        $posts = $posts->with('company')->paginate(6);
         return $posts;
     }
     public function getCategories()
