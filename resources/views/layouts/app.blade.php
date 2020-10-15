@@ -26,7 +26,7 @@
     <div id="app">
        @yield('layout-holder')
     </div>
-    
+ 
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('js')
 </body>

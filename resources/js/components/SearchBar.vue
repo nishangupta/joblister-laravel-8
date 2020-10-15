@@ -3,21 +3,24 @@
     <div class="py-4">
       <div class="row">
         <div class="col-md-6 offset-md-3">
-          <div class="row m-1">
-            <div class="col-md-12 input-group">
-              <input
-                type="text"
-                name="q"
-                class="form-control"
-                placeholder="Job title"
-              />
-              <span class="input-group-append">
-                <button class="btn btn-success text-white pt-1">
-                  <span class="icon-search"></span> Search Jobs
-                </button>
-              </span>
+          <form>
+            <div class="row m-1">
+              <div class="col-md-12 input-group">
+                <input
+                  type="text"
+                  name="q"
+                  class="form-control"
+                  placeholder="Search By Job Title"
+                  v-model="jobTitle"
+                />
+                <span class="input-group-append">
+                  <button class="btn btn-success pt-1" @click="searchByTitle">
+                    <span class="icon-search"></span> Search Jobs
+                  </button>
+                </span>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
         <div
           class="col-md-6 offset-md-3 row align-items-center small text-center my-2"
@@ -43,7 +46,36 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "search-bar",
+  data() {
+    return {
+      jobTitle: null,
+    };
+  },
+  mounted() {
+    const q = this.getParameterByName("q", window.location.href);
+    if (q !== "") {
+      this.jobTitle = q;
+    }
+  },
+  methods: {
+    searchByTitle() {
+      if (this.jobTitle.trim() != "") {
+        this.$emit("searchByTitle", this.jobTitle);
+      }
+    },
+    getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    },
+  },
+};
 </script>
 
 <style scoped>

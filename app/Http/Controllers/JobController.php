@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\CompanyCategory;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -40,5 +41,15 @@ class JobController extends Controller
     {
         $categories = CompanyCategory::all();
         return $categories->toJson();
+    }
+    public function getAllOrganization()
+    {
+        $companies = Company::all();
+        return $companies;
+    }
+    public function getAllByTitle()
+    {
+        $posts = Post::where('deadline', '>', Carbon::now())->get()->pluck('id', 'job_title');
+        return $posts;
     }
 }

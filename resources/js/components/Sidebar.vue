@@ -135,23 +135,23 @@ export default {
   methods: {
     setCategoies() {
       axios
-        .get("/company-categories")
+        .get("/api/company-categories")
         .then((res) => res.data)
         .then((data) => {
           this.categories = JSON.parse(JSON.stringify(data));
         });
     },
     filterCategory(e) {
-      this.$emit("filterCategory", e.target.value);
+      this.$emit("get-by-category", e.target.value);
     },
     filterEmploymentType(e) {
-      this.$emit("filterEmploymentType", e.target.value);
+      this.$emit("get-by-employmentType", e.target.value);
     },
     filterEducation(e) {
-      this.$emit("filterEducation", e.target.value);
+      this.$emit("get-by-education", e.target.value);
     },
     filterJobLevel(e) {
-      this.$emit("filterJobLevel", e.target.value);
+      this.$emit("get-by-job-level", e.target.value);
     },
   },
 };
