@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     searchByTitle: (title) => {
-      window.location.href = `/api/search?q=${title}`;
+      this.$router.push({ name: "/", params: { q: title } });
     },
   },
 };
