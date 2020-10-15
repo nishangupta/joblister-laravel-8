@@ -105,6 +105,7 @@ class AccountController extends Controller
     {
         return view('account.deactivate');
     }
+
     public function deleteAccount()
     {
         $user = User::find(auth()->user()->id);

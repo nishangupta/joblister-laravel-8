@@ -35,7 +35,7 @@ class JobController extends Controller
         }
 
         $posts = $posts->with('company')->paginate(6);
-        return $posts;
+        return $posts->toJson();
     }
     public function getCategories()
     {
@@ -45,11 +45,11 @@ class JobController extends Controller
     public function getAllOrganization()
     {
         $companies = Company::all();
-        return $companies;
+        return $companies->toJson();
     }
     public function getAllByTitle()
     {
         $posts = Post::where('deadline', '>', Carbon::now())->get()->pluck('id', 'job_title');
-        return $posts;
+        return $posts->toJson();
     }
 }

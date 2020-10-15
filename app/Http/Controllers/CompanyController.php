@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,8 @@ class CompanyController extends Controller
         if (auth()->user()->company) {
             return $this->edit();
         }
-        return view('company.create');
+        $categories = CompanyCategory::all();
+        return view('company.create', compact('categories'));
     }
 
     /**

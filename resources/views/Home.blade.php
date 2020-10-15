@@ -13,8 +13,8 @@
                 </p>
               </div>
               <div class="home-search-bar">
-                  <input type="text" name="q" placeholder="Search job by title" class="home-search-input form-control">
-                  <button type="submit" class="btn btn-light"><i class="fas fa-search"></i></button>
+                  <input type="text" name="q" placeholder="Search Job By Title" class="home-search-input form-control">
+                  <button type="submit" class="secondary-btn"><i class="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -33,57 +33,35 @@
   
   {{-- jobs list --}}
   <section class="jobs-section py-5">
-    <div class="container">
+    <div class="container-fluid px-0">
       <div class="row ">
-        <div class="col-sm-12 col-md-8 ml-auto">
+        <div class="col-sm-12 col-md-7 ml-auto">
           <div class="card">
             <div class="card-header">
               <p class="card-title font-weight-bold">Top jobs</p>
             </div>
             <div class="card-body">
-              <div class="top-jobs " >
+              <div class="top-jobs" >
                 <div class="row">
-                  <div class="col-md-4 col-sm-6 mb-sm-3">
-                    <a href="/home">
-                     <div class="job-item">
-                       <img src="{{asset('images/companies/medical.jpg')}}" alt="job listings" class="">
-                       <div class="job-description">
-                         <p class="company-name">Medical center asdasdasdasasdasdasd</p>
+
+                  @foreach ($posts as $post)
+                  <div class="col-sm-6 col-md-6 col-lg-4 col-sm-6 mb-sm-3">
+                    <a href="{{route('post.show',['job'=>$post->id])}}">
+                     <div class="job-item border row h-100">
+                       <div class="col-xs-3 col-sm-4 col-md-5">
+                         <img src="{{asset($post->company->logo)}}" alt="job listings" class="img-fluid p-2">
+                       </div>
+                       <div class="job-description col-xs-9 col-sm-8 col-md-7">
+                        <p class="company-name">{{$post->company->title}}</p>
                          <ul class="company-listings">
-                           <li>{{substr('Assistant Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur dolor laborum voluptatibus obcaecati et culpa at error aliquid incidunt necessitatibus.', 0, 27)}}</li>
+                           <li>•{{substr($post->job_title, 0, 27)}}</li>
                          </ul>
                        </div>
                      </div>
                     </a>
                    </div>
+                  @endforeach
 
-                   <div class="col-md-4 col-sm-6 mb-sm-3">
-                    <a href="/home">
-                      <div class="job-item">
-                        <img src="{{asset('images/companies/medical.jpg')}}" alt="job listings" class="">
-                        <div class="job-description">
-                          <p class="company-name">Medical center</p>
-                          <ul class="company-listings">
-                            <li>Assistant Pharmacist</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </a>
-                  </div>  
-
-                  <div class="col-md-4 col-sm-6 mb-sm-3">
-                    <a href="/home">
-                    <div class="job-item">
-                      <img src="{{asset('images/companies/medical.jpg')}}" alt="job listings" class="">
-                      <div class="job-description">
-                        <p class="company-name">Medical center</p>
-                        <ul class="company-listings">
-                          <li>Assistant Pharmacist</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </a>
-                  </div>
                  </div>
                </div>
              </div>
@@ -98,21 +76,13 @@
             </div>
             <div class="card-body">
               <div class="top-employers">
+              @foreach ($topEmployers as $employer)
                 <div class="top-employer">
-                  <a href="/company">
-                    <img src="{{asset('images/companies/muncha.jpg')}}" class="img-fluid" alt="">
+                  <a href="{{route('account.employer',['employer'=>$employer])}}">
+                    <img src="{{asset($employer->logo)}}" width="60px" class="img-fluid" alt="">
                   </a>
-                </div>
-                <div class="top-employer">
-                  <a href="/company">
-                    <img src="{{asset('images/companies/square.jpg')}}" class="img-fluid" alt="">
-                  </a>
-                </div>
-                <div class="top-employer">
-                  <a href="/company">
-                    <img src="{{asset('images/companies/vertisk.jpg')}}" class="img-fluid" alt="">
-                  </a>
-                </div>
+                </div> 
+              @endforeach
               </div>
             </div>
           </div>
@@ -123,13 +93,11 @@
               </div>
               <div class="card-body">
                 <div class="jobs-category mb-3 mt-0">
-                  <div><a href="/marketing" class="text-muted">Marketing/Advertising</a> </div>
-                  <div><a href="/marketing" class="text-muted">It/Communication</a> </div>
-                  <div><a href="/marketing" class="text-muted">General Mgmt/Administrator</a> </div>
-                  <div><a href="/marketing" class="text-muted">Ngo Ingo/Social workers</a> </div>
-                  <div><a href="/marketing" class="text-muted">Accounting/Finance</a> </div>
+                  @foreach ($categories as $category)
+                  <div><a href="{{URL::to('search?category_id='.$category->id)}}" class="text-muted">{{$category->category_name}}</a> </div>
+                  @endforeach
                 </div>
-                <a href="/more" class="text-muted">More..</a>
+                <a href="{{route('job.index')}}" class="text-muted">More..</a>
               </div>
             </div>
           </div>
@@ -139,12 +107,3 @@
   </section>
 @endsection
 
-@push('css')
-<style>
- 
-</style>
-@endpush
-
-@push('js')
-    
-@endpush

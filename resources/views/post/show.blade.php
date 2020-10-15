@@ -18,7 +18,7 @@
                 <img src="{{asset($company->logo)}}" alt="" class="company-logo">
                 <div>
                   <a href="{{route('account.employer',['employer'=>$company])}}" class="secondary-link">
-                    <p class="h5 font-weight-bold">{{$company->title}}</p>
+                    <p>{{$company->title}}</p>
                     <p class="company-category">{{$company->getCategory->category_name}}</p>
                   </a>
                 </div>
@@ -113,7 +113,6 @@
                 {{-- <p class="font-weight-bold">More Specifications</p> --}}
                 <p class="py-2">{!!$post->specifications!!}</p>
               </div>
-
               <br>
               <hr>
               <div class="d-flex justify-content-between">
@@ -122,10 +121,10 @@
                   <a href="{{route('savedJob.store',['id'=>$post])}}" class="btn primary-outline-btn"><i class="fas fa-star"></i> Save job</a>
                 </div>
                 <div class="social-links">
-                  <a href="www.facebook.com" class="btn btn-primary"><i class="fab fa-facebook"></i></a>
-                  <a href="www.twitter.com" class="btn btn-primary"><i class="fab fa-twitter"></i></a>
-                  <a href="www.linkedin.com" class="btn btn-primary"><i class="fab fa-linkedin"></i></a>
-                  <a href="www.gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i></a>
+                  <a href="https://www.facebook.com"  target="_blank" class="btn btn-primary"><i class="fab fa-facebook"></i></a>
+                  <a href="https://www.twitter.com" target="_blank"  class="btn btn-primary"><i class="fab fa-twitter"></i></a>
+                  <a href="https://www.linkedin.com"  target="_blank" class="btn btn-primary"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://www.gmail.com" target="_blank"  class="btn btn-primary"><i class="fas fa-envelope"></i></a>
                 </div>
               </div>
             </div>
@@ -148,14 +147,21 @@
           </div>
           <div class="card-body">
             <div class="similar-jobs">
-              <div class="job-item">
-                <img src="{{asset('images/companies/vertisk.jpg')}}" class="company-logo" alt="">
-                <div class="job-desc">
-                  <a href="/job" class="job-category">Finance Assistant</a>
-                  <p class="small">Sanghai Greenland Intl</p>
-                  <p class="company-name text-danger">Deadline: 6 days</p>
+              @foreach ($similarJobs as $job)
+                <div class="job-item row">
+                  <div class="col-4">
+                    <img src="{{asset($job->company->logo)}}" class="company-logo" alt="">
+                  </div>
+                  <div class="job-desc col-8">
+                    <a href="{{route('post.show',['job'=>$post])}}" class="job-category text-muted font-weight-bold">
+                      <p class="text-muted h6">{{$job->job_title}}</p>
+                      <p class="small">{{$job->company->title}}</p>
+                      <p class="font-weight-normal small text-danger">Deadline: {{date('d',$job->remainingDays())}} days</p>
+                    </a>
+                
+                  </div>
                 </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -171,10 +177,11 @@
   .company-banner {
     min-height: 20vh;
     position: relative;
+    overflow: hidden;
   }
 
   .company-banner-img {
-    width: 100;
+    width: 100%;
     height: auto;
     overflow: hidden;
   }
@@ -183,6 +190,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
     background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .3));
     width: 100%;
     height: 200px;
@@ -201,12 +209,13 @@
     align-items: center;
     left: 2rem;
     bottom: 1rem;
-    color: white;
+    color: #333;
     padding-right: 2rem;
+    background-color:rgba(255,255,255,.8);
   }
 
   .company-logo {
-    width: 100px;
+    max-width: 100px;
     height: auto;
     margin-right: 1rem;
     padding: 1rem;
@@ -233,30 +242,14 @@
     background: linear-gradient(to right, #e1edf7, #EDF2F7)
   }
 
-  /* .similar-jobs */
-  .job-item {
-    display: flex;
+  .job-item{
+    margin-bottom: .5rem;
+    padding:.5rem 0;
   }
+  .job-item:hover .job-item {
+    background-color:#eee;
+  } 
 
-  .job-tiem .company-logo {
-    flex: 1;
-    width: 100%;
-    height: auto;
-  }
-
-  .job-item .job-desc {
-    flex: 3;
-
-  }
-
-  .job-category {
-    font-size: .9rem;
-    font-weight: bold;
-  }
-
-  .company-name {
-    font-weight: normal;
-  }
 </style>
 @endpush
 

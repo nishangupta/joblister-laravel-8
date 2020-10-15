@@ -76,7 +76,7 @@ export default {
       this.$Progress.start();
       const query = this.getParameterByName("q", window.location.href);
       const category = this.getParameterByName(
-        "category",
+        "category_id",
         window.location.href
       );
       if (query !== "" && query !== null) {

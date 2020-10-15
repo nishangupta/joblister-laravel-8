@@ -2030,7 +2030,7 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.$Progress.start();
       var query = this.getParameterByName("q", window.location.href);
-      var category = this.getParameterByName("category", window.location.href);
+      var category = this.getParameterByName("category_id", window.location.href);
 
       if (query !== "" && query !== null) {
         axios.get("/api/search/?q=" + query).then(function (res) {
@@ -2152,26 +2152,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //

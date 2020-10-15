@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\CompanyCategory;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = Post::latest()->take(20)->with('company')->get();
+        $categories = CompanyCategory::take(5)->get();
+        $topEmployers = Company::latest()->take(3)->get();
+        return view('home')->with([
+            'posts' => $posts,
+            'categories' => $categories,
+            'topEmployers' => $topEmployers
+        ]);
     }
 
     /**
@@ -58,10 +67,14 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-
+        $company = $post->company()->first();
+        $similarPosts = Post::whereHas('company', function ($query) use ($company) {
+            return $query->where('company_category_id', $company->company_category_id);
+        })->with('company')->take(4)->get();
         return view('post.show')->with([
             'post' => $post,
-            'company' => $post->company
+            'company' => $company,
+            'similarJobs' => $similarPosts
         ]);
     }
 

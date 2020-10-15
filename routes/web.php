@@ -20,7 +20,6 @@ Route::get('/', [PostController::class, 'index'])->name('post.index');
 Route::get('/job/{job}', [PostController::class, 'show'])->name('post.show');
 Route::get('employer/{employer}', [AuthorController::class, 'employer'])->name('account.employer');
 
-
 //return vue page
 Route::get('/search', [JobController::class, 'index'])->name('job.index');
 
@@ -45,6 +44,7 @@ Route::middleware('auth')->prefix('account')->group(function () {
   Route::group(['middleware' => ['role:admin']], function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('account.dashboard');
     Route::get('view-all-users', [AdminController::class, 'viewAllUsers'])->name('account.viewAllUsers');
+    Route::delete('view-all-users', [AdminController::class, 'destroyUser'])->name('account.destroyUser');
 
     Route::get('category/{category}/edit', [CompanyCategoryController::class, 'edit'])->name('category.edit');
     Route::post('category', [CompanyCategoryController::class, 'store'])->name('category.store');

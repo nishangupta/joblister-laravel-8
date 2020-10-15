@@ -42,4 +42,14 @@ class AdminController extends Controller
             'users' => $users
         ]);
     }
+
+    public function destroyUser(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        if ($user->delete()) {
+            return redirect()->route('account.viewAllUsers');
+        } else {
+            return redirect()->intented('account.viewAllUsers');
+        }
+    }
 }

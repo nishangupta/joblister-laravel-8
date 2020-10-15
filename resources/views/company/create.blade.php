@@ -10,12 +10,10 @@
         @csrf
         <div class="form-group">
           <label for="">Choose a Company Category</label>
-          <select class="form-control" name="category" value="{{ old('category') }}"  required>
-            <option value="1"> IT & Telecommunication</option>
-            <option value="2"> Marketing / Advertising</option>
-            <option value="3"> General Mgmt.</option>
-            <option value="4"> Marketing / Advertising</option>
-            <option value="5"> Marketing / Advertising</option>
+          <select class="form-control" name="category" value="{{ old('category') }}" required>
+            @foreach($categories as $category)
+          <option value="{{$category_id}}">{{$category->category_name}}</option>
+            @endforeach
           </select>
         </div>
 

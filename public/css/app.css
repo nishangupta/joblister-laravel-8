@@ -12045,7 +12045,6 @@ button {
 }
 
 .jobs-section .job-item {
-  display: flex;
   padding: 6px 0;
 }
 
@@ -12053,15 +12052,7 @@ button {
   background-color: #eee;
 }
 
-.jobs-section .job-item img {
-  width: 100%;
-  height: auto;
-  flex: 1;
-  border: 1px solid #ccc;
-}
-
 .jobs-section .job-item .job-description {
-  flex: 4;
   padding-left: 1rem;
 }
 

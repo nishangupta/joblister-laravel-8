@@ -16,6 +16,7 @@
                   <th>Users</th>
                   <th>Email</th>
                   <th>created on</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,11 +27,20 @@
                   <td>{{$user->name}}</td>
                   <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
                   <td>{{$user->created_at}}</td>
+                  <td>
+                    <form action="{{route('account.destroyUser')}}" method="POST">
+                      @csrf
+                      @method('delete')
+                      <input type="hidden" name="user_id" value="{{$user->id}}">
+                      <button class="btn primary-btn">Delete</button>
+                    </form>
+                  </td>
                 </tr>
                 @endforeach
                 @else
                 <tr>
                   <td>There isn't any users.</td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
