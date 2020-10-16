@@ -45,21 +45,23 @@
                 <div class="row">
 
                   @foreach ($posts as $post)
-                  <div class="col-sm-6 col-md-6 col-lg-4 col-sm-6 mb-sm-3">
-                    <a href="{{route('post.show',['job'=>$post->id])}}">
-                     <div class="job-item border row h-100">
-                       <div class="col-xs-3 col-sm-4 col-md-5">
-                         <img src="{{asset($post->company->logo)}}" alt="job listings" class="img-fluid p-2">
-                       </div>
-                       <div class="job-description col-xs-9 col-sm-8 col-md-7">
-                        <p class="company-name">{{$post->company->title}}</p>
-                         <ul class="company-listings">
-                           <li>•{{substr($post->job_title, 0, 27)}}</li>
-                         </ul>
-                       </div>
-                     </div>
-                    </a>
-                   </div>
+                    @if ($post->company)
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-sm-6 mb-sm-3">
+                      <a href="{{route('post.show',['job'=>$post->id])}}">
+                      <div class="job-item border row h-100">
+                        <div class="col-xs-3 col-sm-4 col-md-5">
+                          <img src="{{asset($post->company->logo)}}" alt="job listings" class="img-fluid p-2">
+                        </div>
+                        <div class="job-description col-xs-9 col-sm-8 col-md-7">
+                        <p class="company-name" title="{{$post->company->title}}">{{$post->company->title}}</p>
+                          <ul class="company-listings">
+                            <li>•{{substr($post->job_title, 0, 27)}}</li>
+                        </ul>
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                    @endif
                   @endforeach
 
                  </div>

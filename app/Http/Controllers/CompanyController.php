@@ -18,7 +18,7 @@ class CompanyController extends Controller
     public function create()
     {
         if (auth()->user()->company) {
-            Alert::toast('Create a company first!', 'info');
+            Alert::toast('You already have a company!', 'info');
             return $this->edit();
         }
         $categories = CompanyCategory::all();
@@ -37,7 +37,7 @@ class CompanyController extends Controller
 
         $company = new Company();
         if ($this->companySave($company, $request)) {
-            Alert::toast('Company created!', 'success');
+            Alert::toast('Company created! Now you can add posts.', 'success');
             return redirect()->route('account.authorSection');
         }
         Alert::toast('Failed!', 'error');

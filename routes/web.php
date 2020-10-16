@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\savedJobController;
 use App\Models\CompanyCategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -80,62 +81,6 @@ Route::middleware('auth')->prefix('account')->group(function () {
   });
 });
 
-//admins
-// Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
-// Route::get('/admin/register', [AdminLoginController::class, 'showRegistrationForm'])->name('admin.register');
-// Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
-// Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
-// Route::post('/admin/register', [AdminLoginController::class, 'register'])->name('admin.register');
-
-Route::get('/make-role', function () {
-  $roles = ['admin', 'author', 'user'];
-  foreach ($roles as $role) {
-    Role::create(['name' => $role]);
-  }
-});
-
-Route::get('/make-permiss', function () {
-  $roles = ['view-dashboard', 'create-post', 'edit-post', 'delete-post', 'manage-authors', 'author-section', 'create-category', 'edit-category', 'delete-category', 'create-company', 'edit-company', 'delete-company'];
-  foreach ($roles as $role) {
-    Permission::create(['name' => $role]);
-  }
-});
-
-Route::get('/adminPermission', function () {
-  $role = Role::findByName('admin');
-  $permissions = Permission::all()->pluck('name');
-  foreach ($permissions as $permission) {
-    $getPermission = Permission::findByName($permission);
-    $role->givePermissionTo($getPermission);
-  }
-});
-
-
-Route::get('/authorPermission', function () {
-  $role = Role::findByName('author');
-
-  $permissions = ['create-post', 'edit-post', 'delete-post', 'author-section', 'create-company', 'edit-company', 'delete-company'];
-  foreach ($permissions as $permission) {
-    $getPermission = Permission::findByName($permission);
-    $role->givePermissionTo($getPermission);
-  }
-});
-
-//has no permission
-// Route::get('/userPermission', function () {
-//   $role = Role::findByName('user');
-
-//   $permissions = ['create_post', 'edit_post', 'delete_post', 'author-section',];
-//   foreach ($permissions as $permission) {
-//     $getPermission = Permission::findByName($permission);
-//     $role->givePermissionTo($getPermission);
-//   }
-
-//   $role->givePermissionTo($permission);
-// });
-
-
 Route::get('/giveadminrole', function () {
   $user = User::find(1);
   $user->assignRole('admin');
@@ -150,11 +95,19 @@ Route::get('/giveuserrole', function () {
   $user->assignRole('user');
 });
 
-Route::get('/registercategories', function () {
-  $categories = ['IT & Telecommunication', 'Marketing / Advertising', 'General Mgmt'];
-  foreach ($categories as $category) {
-    $companyCategory = new CompanyCategory;
-    $companyCategory->category_name = $category;
-    $companyCategory->save();
+
+Route::get('/getUsers', function () {
+  $factoryUsers = [
+    ['name' => 'admin user', 'email' => 'admins@admin.com', 'password' => Hash::make('password')], //password
+    ['name' => 'author user', 'email' => 'authors@author.com', 'password' => Hash::make('password')], //password
+    ['name' => 'simple user', 'email' => 'users@user.com', 'password' => Hash::make('password')], //password
+  ];
+  foreach ($factoryUsers as $user) {
+    $user =  User::factory()->create([
+      'name' => $user['name'],
+      'email' => $user['email'],
+      'password' => $user['password'],
+    ]);
+    $user->assignRole('author');
   }
 });

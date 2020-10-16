@@ -81,6 +81,7 @@
                     </thead>
                     <tbody>
                         @foreach($recentAuthors as $author)
+                        @if ($author->company)
                         <tr>
                             <td>{{$author->id}}</td>
                             <td>{{$author->name}}</td>
@@ -90,6 +91,7 @@
                             <a href="{{route('account.employer',['employer'=>$author->company])}}" class="btn primary-btn">View Company</a>
                             </td> 
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>

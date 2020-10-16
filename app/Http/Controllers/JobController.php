@@ -34,7 +34,8 @@ class JobController extends Controller
             $posts = Post::take(30);
         }
 
-        $posts = $posts->with('company')->paginate(6);
+        $posts = $posts->has('company')->with('company')->paginate(6);
+
         return $posts->toJson();
     }
     public function getCategories()
