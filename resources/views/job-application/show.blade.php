@@ -6,6 +6,7 @@
     Job Application
   </div>
   <div class="account-bdy p-3">
+  <p class="alert alert-primary">User named <span class="text-capitalize"> ({{$applicant->name}})</span> applied for your listing on {{$application->created_at}}</p>
     <div class="row">
       <div class="col-sm-12 col-md-12 mb-5">
         <div class="card">

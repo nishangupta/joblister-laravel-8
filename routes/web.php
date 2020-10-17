@@ -9,12 +9,7 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\savedJobController;
-use App\Models\CompanyCategory;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 //public routes
 Route::get('/', [PostController::class, 'index'])->name('post.index');
@@ -79,35 +74,4 @@ Route::middleware('auth')->prefix('account')->group(function () {
     Route::get('become-employer', [AccountController::class, 'becomeEmployerView'])->name('account.becomeEmployer');
     Route::post('become-employer', [AccountController::class, 'becomeEmployer'])->name('account.becomeEmployer');
   });
-});
-
-Route::get('/giveadminrole', function () {
-  $user = User::find(1);
-  $user->assignRole('admin');
-});
-
-Route::get('/giveauthorrole', function () {
-  $user = User::find(2);
-  $user->assignRole('author');
-});
-Route::get('/giveuserrole', function () {
-  $user = User::find(3);
-  $user->assignRole('user');
-});
-
-
-Route::get('/getUsers', function () {
-  $factoryUsers = [
-    ['name' => 'admin user', 'email' => 'admins@admin.com', 'password' => Hash::make('password')], //password
-    ['name' => 'author user', 'email' => 'authors@author.com', 'password' => Hash::make('password')], //password
-    ['name' => 'simple user', 'email' => 'users@user.com', 'password' => Hash::make('password')], //password
-  ];
-  foreach ($factoryUsers as $user) {
-    $user =  User::factory()->create([
-      'name' => $user['name'],
-      'email' => $user['email'],
-      'password' => $user['password'],
-    ]);
-    $user->assignRole('author');
-  }
 });

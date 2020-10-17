@@ -135,7 +135,7 @@ class CompanyController extends Controller
         $company->company_category_id = $request->category;
         $company->website = $request->website;
 
-        //logo
+        //logo should exist but still checking for the name
         if ($request->hasFile('logo')) {
             $fileNameToStore = $this->getFileName($request->file('logo'));
             $logoPath = $request->file('logo')->storeAs('public/companies/logos', $fileNameToStore);
@@ -154,6 +154,7 @@ class CompanyController extends Controller
             }
             $company->cover_img = 'storage/companies/cover/' . $fileNameToStore;
         }
+        $company->cover_img = 'nocover';
         if ($company->save()) {
             return true;
         }

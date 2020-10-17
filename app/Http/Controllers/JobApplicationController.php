@@ -37,6 +37,7 @@ class JobApplicationController extends Controller
             'applicant' => $applicant,
             'post' => $post,
             'company' => $company,
+            'application' => $application
         ]);
     }
     public function destroy(Request $request)

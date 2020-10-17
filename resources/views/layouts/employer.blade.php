@@ -39,8 +39,7 @@
     width:100%;
     height:12rem;
     margin-bottom: 3rem;
-    /* background:linear-gradient(to bottom right,#185A91,#1D93D2,#06BEB6); */
-    background:linear-gradient(to bottom left,#0575E6,#021B79);
+    background: linear-gradient(to right, #185A91, #3498DA);
     
   }
   .employer-card img{
