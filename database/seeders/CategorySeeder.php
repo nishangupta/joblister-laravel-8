@@ -25,7 +25,6 @@ class CategorySeeder extends Seeder
             'Mobile App', 'Sales', 'E-Commerce', 'Others'
         ];
         foreach ($categories as $category) {
-
             DB::table('company_categories')->insert([
                 'category_name' => $category
             ]);

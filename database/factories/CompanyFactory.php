@@ -26,7 +26,7 @@ class CompanyFactory extends Factory
             'company_category_id' => 1,
             'logo' => 'images/companies/logos/',
             'title' => 'Web App developer',
-            'description' => 'First Pay Technology Pvt Ltd is the company specialized to help organizations with financial technology solutions. We provide solutions such comprehensive mobile and online payment solutions and gateway facilitating services. We facilitate in online transaction settlement service to merchants and their banks to be able to accept/acquire payments from third party payment sources. We provide technology and solutions for acquiring payment from 3rd party wallets, smart wallets solutions, merchant management solutions and host of other solutions..',
+            'description' => 'This company Pvt Ltd is the company specialized to help organizations with financial technology solutions. We provide solutions such comprehensive mobile and online payment solutions and gateway facilitating services. We facilitate in online transaction settlement service to merchants and their banks to be able to accept/acquire payments from third party payment sources. We provide technology and solutions for acquiring payment from 3rd party wallets, smart wallets solutions, merchant management solutions and host of other solutions..',
             'webisite' => 'https://www.companywebsite.com',
             'cover_img' => '',
             'created_at' => date("Y-m-d H:i:s"),
