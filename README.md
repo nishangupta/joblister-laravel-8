@@ -58,7 +58,7 @@ border="0" /></a>
 ## 2. Set the basic config
 
 > Edit example.env to .env <br />
-> Put your db username and password here with DB_DATABASE=nepestate. <br />
+> Put your db username and password here with DB_DATABASE=job_lister. <br />
 > ''' <br />
 
     DB_CONNECTION=mysql <br />
