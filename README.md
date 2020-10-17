@@ -1,6 +1,7 @@
 # About Joblister
 
 Joblister is made with laravel 8 and vue js.
+Having user,author,admin role and permissions
 Live : [Click Me](http://joblister-laravel-8.herokuapp.com)
 
 <br />
@@ -26,19 +27,19 @@ border="0" /></a>
 border="0" /></a>
 <br />
 
-### Post Description panel
-<a href="https://i.ibb.co/xmhJ7WQ/Screenshot-72.png"><img src="https://i.ibb.co/xmhJ7WQ/Screenshot-72.png" target="_blank" alt="Screenshot-10"
-border="0" /></a>
-<br />
-
 ### Author Dashboard
 <a href="https://i.ibb.co/C6JKQ1h/Screenshot-78.png"><img src="https://i.ibb.co/C6JKQ1h/Screenshot-78.png" alt="Screenshot-46" border="0" /></a>
 <br />
 
 ### Admin Dashboard
 <a href="https://i.ibb.co/mD4961P/Screenshot-79.png"><img src="https://i.ibb.co/mD4961P/Screenshot-79.png" alt="Screenshot-46" border="0" /></a>
-
 <br />
+
+### Apply job panel
+<a href="https://i.ibb.co/xmhJ7WQ/Screenshot-72.png"><img src="https://i.ibb.co/xmhJ7WQ/Screenshot-72.png" target="_blank" alt="Screenshot-10"
+border="0" /></a>
+<br />
+
 </p>
 
 ## Installations
