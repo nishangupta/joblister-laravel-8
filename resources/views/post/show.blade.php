@@ -150,6 +150,7 @@
           <div class="card-body">
             <div class="similar-jobs">
               @foreach ($similarJobs as $job)
+              @if($similarJobs)
                 <div class="job-item border-bottom row">
                   <div class="col-4">
                     <img src="{{asset($job->company->logo)}}" class="company-logo" alt="">
@@ -160,9 +161,15 @@
                       <p class="small">{{$job->company->title}}</p>
                       <p class="font-weight-normal small text-danger">Deadline: {{date('d',$job->remainingDays())}} days</p>
                     </a>
-                
                   </div>
                 </div>
+                @else
+                <div class="card">
+                  <div class="card-header">
+                    <p>No similar jobs</p>
+                  </div>
+                </div>
+                @endif
               @endforeach
             </div>
           </div>
