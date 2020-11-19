@@ -34,16 +34,6 @@ border="0" /></a>
 <a href="https://i.ibb.co/mD4961P/Screenshot-79.png"><img src="https://i.ibb.co/mD4961P/Screenshot-79.png" alt="Screenshot-46" border="0" /></a>
 <br />
 
-### Apply job panel
-<a href="https://i.ibb.co/xmhJ7WQ/Screenshot-72.png"><img src="https://i.ibb.co/xmhJ7WQ/Screenshot-72.png" target="_blank" alt="Screenshot-10"
-border="0" /></a>
-<br />
-
-### Login
-<a href="https://i.ibb.co/LQ1RS8H/Screenshot-80.png"><img src="https://i.ibb.co/LQ1RS8H/Screenshot-80.png" target="_blank" alt="Screenshot-10"
-border="0" /></a>
-<br />
-
 </p>
 
 ## Installations
